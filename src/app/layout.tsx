@@ -12,14 +12,14 @@ const geist = Geist({
 
 export const metadata: Metadata = {
   title: {
-    default: "그린수피아(Greensupia) - 친환경 비닐 제작업체",
-    template: "%s | 그린수피아(Greensupia)",
+    default: "비오드(BIODE) - 친환경 비닐 제작업체",
+    template: "%s | 비오드(BIODE)",
   },
   description:
-    "그린수피아(Greensupia)는 친환경 비닐 제작업체로, 지속가능한 농업을 위한 혁신적인 솔루션을 제공합니다. 환경을 생각하는 농업인의 선택입니다.",
+    "비오드(BIODE)는 친환경 비닐 제작업체로, 지속가능한 농업을 위한 혁신적인 솔루션을 제공합니다. 환경을 생각하는 농업인의 선택입니다.",
   keywords: [
-    "그린수피아",
-    "Greensupia",
+    "비오드",
+    "BIODE",
     "친환경 비닐",
     "농업",
     "지속가능",
@@ -34,15 +34,15 @@ export const metadata: Metadata = {
     "친환경 소재",
     "농업 솔루션",
   ],
-  authors: [{ name: "그린수피아(Greensupia)" }],
-  creator: "그린수피아(Greensupia)",
-  publisher: "그린수피아(Greensupia)",
+  authors: [{ name: "비오드(BIODE)" }],
+  creator: "비오드(BIODE)",
+  publisher: "비오드(BIODE)",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://www.greensupia.com"),
+  metadataBase: new URL("https://www.biode.com"),
   alternates: {
     canonical: "/",
     languages: {
@@ -53,26 +53,26 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "ko_KR",
-    url: "https://www.greensupia.com",
-    title: "그린수피아(Greensupia) - 친환경 비닐 제작업체",
+    url: "https://www.biode.com",
+    title: "비오드(BIODE) - 친환경 비닐 제작업체",
     description:
-      "그린수피아(Greensupia)는 친환경 비닐 제작업체로, 지속가능한 농업을 위한 혁신적인 솔루션을 제공합니다.",
-    siteName: "그린수피아(Greensupia)",
+      "비오드(BIODE)는 친환경 비닐 제작업체로, 지속가능한 농업을 위한 혁신적인 솔루션을 제공합니다.",
+    siteName: "비오드(BIODE)",
     images: [
       {
-        url: "/greensupia-og.jpg",
+        url: "/biode-og.jpg",
         width: 1200,
         height: 630,
-        alt: "그린수피아 친환경 비닐",
+        alt: "비오드 친환경 비닐",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "그린수피아(Greensupia) - 친환경 비닐 제작업체",
+    title: "비오드(BIODE) - 친환경 비닐 제작업체",
     description:
-      "그린수피아(Greensupia)는 친환경 비닐 제작업체로, 지속가능한 농업을 위한 혁신적인 솔루션을 제공합니다.",
-    images: ["/greensupia-og.jpg"],
+      "비오드(BIODE)는 친환경 비닐 제작업체로, 지속가능한 농업을 위한 혁신적인 솔루션을 제공합니다.",
+    images: ["/biode-og.jpg"],
   },
   robots: {
     index: true,
@@ -100,7 +100,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body className={`${geist.variable} greensupia-layout`}>
+      <body className={`${geist.variable} biode-layout`}>
         <ConditionalLayout>{children}</ConditionalLayout>
 
         {/* 방문자 로그 자동 기록 */}

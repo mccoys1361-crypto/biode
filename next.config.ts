@@ -14,13 +14,13 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "www.greensupia.com",
+        hostname: "www.biode.com",
         port: "",
         pathname: "/banner-news/**",
       },
       {
         protocol: "https",
-        hostname: "greensupia.com",
+        hostname: "biode.com",
         port: "",
         pathname: "/banner-news/**",
       },

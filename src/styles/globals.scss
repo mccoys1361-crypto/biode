@@ -9,7 +9,7 @@
 @use "components/pagination";
 @use "components/toggle-switch";
 @use "components/modal";
-@use "components/greensupia";
+@use "components/biode";
 @use "components/inquiry-write";
 @use "components/inquiry-list";
 @use "components/inquiry-detail";
@@ -32,6 +32,9 @@
   --background-light: #ffffff;
   --text-primary: #2e2e2e;
   --text-muted: #6b7280;
+    // 헤딩 컬러
+    --heading-color: #401F1D; // H1
+    --heading2-color: #8F4C4A; // H2
 
   // 브랜드 색상 (백조 컨셉 - 골드 + 차콜 조화)
   --primary: #f8c300;
@@ -443,7 +446,14 @@ body.admin-portal {
       font-size: 2rem;
       font-weight: 700;
       margin-bottom: var(--spacing-sm);
-      color: var(--primary);
+      color: var(--heading-color);
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: var(--spacing-sm);
+      color: var(--heading2-color);
     }
 
     p {

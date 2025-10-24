@@ -9,8 +9,8 @@ import "../../styles/globals.scss";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "관리자 포털 - Greensupia",
-  description: "Greensupia 관리자 포털 - 콘텐츠 관리 및 시스템 운영",
+  title: "관리자 포털 - BIODE",
+  description: "BIODE 관리자 포털 - 콘텐츠 관리 및 시스템 운영",
 };
 
 export default function AdminLayout({
@@ -33,7 +33,7 @@ export default function AdminLayout({
           <div className="header-content">
             <div className="header-left">
               <Link href="/portal" className="portal-logo">
-                <h1 className="portal-title">Greensupia 관리자 포털</h1>
+                <h1 className="portal-title">BIODE 관리자 포털</h1>
               </Link>
             </div>
             <div className="header-right">
@@ -97,7 +97,7 @@ export default function AdminLayout({
       {/* 푸터 */}
       <footer>
         <div className="footer-content">
-          <span className="footer-logo">Greensupia</span>
+          <span className="footer-logo">BIODE</span>
           <span className="footer-text">관리자 포털</span>
           <span className="footer-year">© 2024</span>
         </div>

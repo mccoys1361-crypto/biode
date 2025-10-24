@@ -44,7 +44,7 @@ export class EmailService {
     );
     console.log(
       "  - EMAIL_FROM_NAME:",
-      process.env.EMAIL_FROM_NAME || "Greensupia"
+      process.env.EMAIL_FROM_NAME || "BIODE"
     );
 
     this.transporter = nodemailer.createTransport(config);
@@ -54,7 +54,7 @@ export class EmailService {
   async sendEmail(content: EmailContent): Promise<boolean> {
     try {
       const mailOptions = {
-        from: `"${process.env.EMAIL_FROM_NAME || "Greensupia"}" <${
+        from: `"${process.env.EMAIL_FROM_NAME || "BIODE"}" <${
           process.env.GMAIL_USER
         }>`,
         to: content.to,
@@ -118,7 +118,7 @@ export class EmailService {
     answer: string,
     authorName: string
   ): EmailContent {
-    const subject = `[Greensupia] 문의글 "${inquiryTitle}"에 답변이 등록되었습니다`;
+    const subject = `[BIODE] 문의글 "${inquiryTitle}"에 답변이 등록되었습니다`;
 
     const html = `
       <!DOCTYPE html>
@@ -181,7 +181,7 @@ export class EmailService {
           
           <div class="footer">
             <p>본 메일은 자동으로 발송되었습니다.</p>
-            <p>© 2024 Greensupia. All rights reserved.</p>
+            <p>© 2024 BIODE. All rights reserved.</p>
           </div>
         </div>
       </body>

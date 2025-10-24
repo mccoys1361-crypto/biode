@@ -22,7 +22,7 @@ export class EncryptionService {
       const key = this.deriveKey(password, salt);
 
       const cipher = crypto.createCipheriv(ALGORITHM, key, iv);
-      cipher.setAAD(Buffer.from("greensupia-encryption", "utf8"));
+      cipher.setAAD(Buffer.from("biode-encryption", "utf8"));
 
       let encrypted = cipher.update(text, "utf8", "hex");
       encrypted += cipher.final("hex");
@@ -63,7 +63,7 @@ export class EncryptionService {
       const key = this.deriveKey(password, salt);
 
       const decipher = crypto.createDecipheriv(ALGORITHM, key, iv);
-      decipher.setAAD(Buffer.from("greensupia-encryption", "utf8"));
+      decipher.setAAD(Buffer.from("biode-encryption", "utf8"));
       decipher.setAuthTag(tag);
 
       let decrypted = decipher.update(encrypted, "hex", "utf8");

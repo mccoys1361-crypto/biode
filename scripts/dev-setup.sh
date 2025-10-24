@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Greensupia Next.js Development & Production Environment Setup Script
+# BIODE Next.js Development & Production Environment Setup Script
 # 모든 의존성 문제와 Prisma 엔진 문제를 자동으로 해결
 # 프로덕션 모드에서는 build와 start까지 포함
 # TypeScript 오류 자동 수정 기능 포함
@@ -721,7 +721,7 @@ else
     echo -e "${CYAN}🔧 DEVELOPMENT MODE${NC}"
 fi
 
-echo -e "${CYAN}🌟 Greensupia Next.js Environment Setup Started...${NC}"
+echo -e "${CYAN}🌟 BIODE Next.js Environment Setup Started...${NC}"
 
 # 디버깅: 스크립트 시작 시 schema.prisma 파일 상태 확인
 log_info "🔍 DEBUG: Initial schema.prisma file status check..."

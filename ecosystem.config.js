@@ -1,10 +1,10 @@
 module.exports = {
   apps: [
     {
-      name: "greensupia",
+      name: "biode",
       script: "npm",
       args: "start",
-      cwd: "/home/greensupia",
+      cwd: "/home/biode",
       instances: 1,
       exec_mode: "fork",
       env: {

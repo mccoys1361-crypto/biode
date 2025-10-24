@@ -63,7 +63,7 @@ export default function InquiryEditPage() {
       });
 
       if (response.ok) {
-        router.push(`/greensupia/inquiry/${inquiryId}`);
+        router.push(`/biode/inquiry/${inquiryId}`);
       } else {
         const error = await response.json();
         alert(error.error);

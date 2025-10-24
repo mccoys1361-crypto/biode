@@ -117,9 +117,10 @@ interface History {
   createdAt: string;
 }
 
-export default function GreensupiaHomePage() {
+export default function BIODEHomePage() {
   const [video, setVideo] = useState<Video | null>(null);
-  const [banner, setBanner] = useState<Banner | null>(null);
+  const [banners, setBanners] = useState<Banner[]>([]);
+  const [currentBannerIndex, setCurrentBannerIndex] = useState<number>(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [greeting, setGreeting] = useState<Greeting | null>(null);
@@ -164,6 +165,32 @@ export default function GreensupiaHomePage() {
       document.head.removeChild(style);
     };
   }, []);
+
+  // 배너 자동 로테이션 (5초 간격)
+  useEffect(() => {
+    if (!banners || banners.length <= 1) return;
+    const id = setInterval(() => {
+      setCurrentBannerIndex((prev) => (prev + 1) % banners.length);
+    }, 5000);
+    return () => clearInterval(id);
+  }, [banners]);
+
+  const goToPrevBanner = () => {
+    if (!banners || banners.length === 0) return;
+    setCurrentBannerIndex((prev) =>
+      (prev - 1 + banners.length) % banners.length
+    );
+  };
+
+  const goToNextBanner = () => {
+    if (!banners || banners.length === 0) return;
+    setCurrentBannerIndex((prev) => (prev + 1) % banners.length);
+  };
+
+  const goToBanner = (index: number) => {
+    if (!banners || banners.length === 0) return;
+    setCurrentBannerIndex(index % banners.length);
+  };
 
   // Google Maps API 로드 및 지도 초기화
   useEffect(() => {
@@ -241,13 +268,13 @@ export default function GreensupiaHomePage() {
         new window.google.maps.Marker({
           position: center,
           map: map,
-          title: "Greensupia",
+          title: "BIODE",
         });
         console.log("지도 생성 완료");
 
         // 플레이스홀더 제거
         const placeholder = mapElement.querySelector(
-          ".greensupia-map__placeholder"
+          ".biode-map__placeholder"
         );
         if (placeholder) {
           placeholder.remove();
@@ -333,29 +360,36 @@ export default function GreensupiaHomePage() {
           const bannerResponse = await fetch("/api/banners?action=active");
           if (bannerResponse.ok) {
             const bannerData = await bannerResponse.json();
-            console.log("배너 데이터:", bannerData);
-            // 배열의 첫 번째 항목 사용
-            if (
-              bannerData &&
-              Array.isArray(bannerData) &&
-              bannerData.length > 0
-            ) {
-              const firstBanner = bannerData[0];
-              console.log("첫 번째 배너:", firstBanner);
-              console.log("배너 이미지 URL:", firstBanner.imageUrl);
-
-              // 이미지 URL이 있으면 배너 설정
-              if (firstBanner.imageUrl) {
-                setBanner(firstBanner);
-              } else {
-                console.log("배너 이미지 URL이 없습니다.");
-              }
-            } else {
-              console.log("배너 데이터가 비어있습니다.");
+            console.log("배너 데이터(action=active):", bannerData);
+            let list: Banner[] = [];
+            if (Array.isArray(bannerData)) {
+              list = bannerData as Banner[];
+            } else if (bannerData && Array.isArray(bannerData.content)) {
+              list = bannerData.content as Banner[];
             }
+
+            if (list.length === 0) {
+              // fallback: 전체 조회 시그니처 지원
+              const fallback = await fetch("/api/banners");
+              if (fallback.ok) {
+                const fb = await fallback.json();
+                console.log("배너 데이터(fallback):", fb);
+                const fbList = Array.isArray(fb)
+                  ? (fb as Banner[])
+                  : Array.isArray(fb?.content)
+                  ? (fb.content as Banner[])
+                  : [];
+                list = fbList.filter((b) => !!b.imageUrl && b.isActive !== false);
+              }
+            }
+
+            const validBanners = list.filter((b) => !!b.imageUrl);
+            setBanners(validBanners);
+            setCurrentBannerIndex(0);
           }
         } catch (bannerError) {
           console.log("배너 데이터를 불러올 수 없습니다:", bannerError);
+          setBanners([]);
         }
 
         // 비디오 데이터 가져오기
@@ -482,15 +516,19 @@ export default function GreensupiaHomePage() {
     );
   }
 
+  // 현재 배너 계산
+  const currentBanner =
+    banners.length > 0 ? banners[currentBannerIndex % banners.length] : null;
+
   return (
-    <div className="greensupia-home">
+    <div className="biode-home">
       <OrganizationStructuredData
         data={{
-          name: "Greensupia",
-          url: "https://www.greensupia.com",
+          name: "BIODE",
+          url: "https://www.biode.com",
           description:
-            "Greensupia는 친환경 비닐 제작업체로, 지속가능한 농업을 위한 혁신적인 솔루션을 제공합니다.",
-          logo: "https://www.greensupia.com/logo.png",
+            "BIODE는 친환경 비닐 제작업체로, 지속가능한 농업을 위한 혁신적인 솔루션을 제공합니다.",
+          logo: "https://www.biode.com/logo.png",
           address: {
             streetAddress: "테헤란로 123",
             addressLocality: "강남구",
@@ -505,32 +543,69 @@ export default function GreensupiaHomePage() {
         }}
       />
 
-      {/* 배너 섹션 - 전체 너비 */}
-      {banner && banner.imageUrl && (
-        <section className="greensupia-banner-full">
-          <div
-            className="greensupia-banner"
-            style={{
-              backgroundImage: `url(${banner.imageUrl})`,
-            }}
-          >
-            <div className="greensupia-banner__overlay"></div>
-            <div className="greensupia-banner__content">
-              <h2>{banner.title}</h2>
-              {banner.description && (
-                <div 
+      {/* 배너 섹션 - 배열에서 현재 배너만 표시 (이미지 엘리먼트 방식) */}
+      {currentBanner && currentBanner.imageUrl && (
+        <section className="biode-banner-full biode-banner-full--flush">
+          <div className="biode-banner-image">
+            <img
+              key={currentBanner.id}
+              src={currentBanner.imageUrl}
+              alt={currentBanner.title ?? "banner"}
+              className="biode-banner-image__img"
+              loading="eager"
+              decoding="async"
+            />
+
+            {/* 배너 내 컨트롤 */}
+            {banners.length > 1 && (
+              <div className="biode-banner-controls">
+                <button
+                  type="button"
+                  aria-label="이전 배너"
+                  className="biode-banner-controls__prev"
+                  onClick={goToPrevBanner}
+                >
+                  ‹
+                </button>
+                <button
+                  type="button"
+                  aria-label="다음 배너"
+                  className="biode-banner-controls__next"
+                  onClick={goToNextBanner}
+                >
+                  ›
+                </button>
+                <div className="biode-banner-dots" role="tablist" aria-label="배너 선택">
+                  {banners.map((_, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      role="tab"
+                      aria-selected={idx === currentBannerIndex}
+                      aria-label={`${idx + 1}번째 배너`}
+                      className={`biode-banner-dots__dot ${idx === currentBannerIndex ? "is-active" : ""}`}
+                      onClick={() => goToBanner(idx)}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {currentBanner.description && (
+              <div className="biode-banner__content">
+                <div
                   className="banner-description"
-                  dangerouslySetInnerHTML={{ __html: banner.description }}
+                  dangerouslySetInnerHTML={{ __html: currentBanner.description }}
                 />
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </section>
       )}
 
-      <main className="greensupia-home__container">
+      <main className="biode-home__container">
         {/* 기본 히어로 섹션 (배너가 없을 때) */}
-        {!banner && (
+        {banners.length === 0 && (
           <section className="mb-12 bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 py-20 rounded-lg relative overflow-hidden text-center">
             {/* 배경 패턴 */}
             <div className="absolute inset-0 opacity-10">
@@ -551,13 +626,13 @@ export default function GreensupiaHomePage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
-                  href="/greensupia/inquiry"
+                  href="/biode/inquiry"
                   className="bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                 >
                   문의하기
                 </Link>
                 <Link
-                  href="/greensupia/projects"
+                  href="/biode/projects"
                   className="border-2 border-green-600 text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-green-600 hover:text-white transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                 >
                   프로젝트 보기
@@ -569,11 +644,11 @@ export default function GreensupiaHomePage() {
 
         {/* 인사말 섹션 */}
         {greeting && (
-          <section className="greensupia-greeting">
-            <h2 className="greensupia-greeting__title">{greeting.title}</h2>
-            <div className="greensupia-greeting__container">
+          <section className="biode-greeting">
+            <h2 className="biode-greeting__title">{greeting.title}</h2>
+            <div className="biode-greeting__container">
               <div
-                className="greensupia-greeting__content"
+                className="biode-greeting__content"
                 dangerouslySetInnerHTML={{ __html: greeting.content }}
               />
             </div>
@@ -582,19 +657,19 @@ export default function GreensupiaHomePage() {
 
         {/* 배너뉴스 섹션 */}
         {bannerNews && bannerNews.length > 0 && (
-          <section className="greensupia-news greensupia-section">
-            <h2 className="greensupia-contact__title">최신 소식</h2>
-            <div className="greensupia-news__grid">
+          <section className="biode-news biode-section">
+            <h2 className="biode-contact__title">최신 소식</h2>
+            <div className="biode-news__grid">
               {bannerNews.slice(0, 4).map((news) => (
-                <article key={news.id} className="greensupia-news__item">
+                <article key={news.id} className="biode-news__item">
                   {news.imageUrl && (
-                    <div className="greensupia-news__image-container">
+                    <div className="biode-news__image-container">
                       <Image
                         src={news.imageUrl}
                         alt={news.title}
                         width={400}
                         height={192}
-                        className="greensupia-news__image"
+                        className="biode-news__image"
                         priority={true}
                         style={{
                           height: "192px",
@@ -604,13 +679,13 @@ export default function GreensupiaHomePage() {
                       />
                     </div>
                   )}
-                  <div className="greensupia-news__content">
-                    <h3 className="greensupia-news__title">{news.title}</h3>
-                    <p className="greensupia-news__description">
+                  <div className="biode-news__content">
+                    <h3 className="biode-news__title">{news.title}</h3>
+                    <p className="biode-news__description">
                       {news.content}
                     </p>
-                    <div className="greensupia-news__meta">
-                      <span className="greensupia-news__date">
+                    <div className="biode-news__meta">
+                      <span className="biode-news__date">
                         {news.startDate
                           ? new Date(news.startDate).toLocaleDateString("ko-KR")
                           : "날짜 없음"}
@@ -620,7 +695,7 @@ export default function GreensupiaHomePage() {
                           href={news.linkUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="greensupia-news__link"
+                          className="biode-news__link"
                         >
                           자세히 보기 →
                         </a>
@@ -665,8 +740,8 @@ export default function GreensupiaHomePage() {
         )}
 
         {video && video.isActive && (
-          <section className="greensupia-video greensupia-section">
-            <h2 className="greensupia-contact__title">회사 소개 영상</h2>
+          <section className="biode-video biode-section">
+            <h2 className="biode-contact__title">회사 소개 영상</h2>
             <div className="bg-white rounded-lg shadow-sm border p-8 text-center">
               {/* <h3 className="text-2xl font-semibold text-gray-900 mb-4 text-center">
                 {video.title}
@@ -676,11 +751,11 @@ export default function GreensupiaHomePage() {
                   {video.description}
                 </p>
               )} */}
-              <div className="greensupia-video__container">
-                <div className="greensupia-video__iframe-wrapper">
+              <div className="biode-video__container">
+                <div className="biode-video__iframe-wrapper">
                   {/* YouTube iframe 렌더링 */}
                   <div
-                    className="greensupia-video__iframe"
+                    className="biode-video__iframe"
                     dangerouslySetInnerHTML={{ __html: video.videoUrl }}
                   />
                 </div>
@@ -691,18 +766,18 @@ export default function GreensupiaHomePage() {
 
         {/* 조직도 섹션 */}
         {organizationChart && organizationChart.isActive && (
-          <section className="greensupia-organization greensupia-section">
-            <h2 className="greensupia-contact__title">조직도</h2>
-            <div className="greensupia-news__container">
+          <section className="biode-organization biode-section">
+            <h2 className="biode-contact__title">조직도</h2>
+            <div className="biode-news__container">
               <div className="bg-white rounded-lg shadow-sm border p-4 text-center">
-                <div className="greensupia-organization__container">
+                <div className="biode-organization__container">
                   {organizationChart.imageUrl ? (
                     <Image
                       src={organizationChart.imageUrl}
                       alt="조직도"
                       width={800}
                       height={600}
-                      className="greensupia-organization__image"
+                      className="biode-organization__image"
                       onError={(e) => {
                         console.error(
                           "조직도 이미지 로드 실패:",
@@ -713,7 +788,7 @@ export default function GreensupiaHomePage() {
                       }}
                     />
                   ) : (
-                    <div className="greensupia-organization__placeholder">
+                    <div className="biode-organization__placeholder">
                       조직도 이미지를 불러올 수 없습니다.
                     </div>
                   )}
@@ -725,11 +800,11 @@ export default function GreensupiaHomePage() {
 
         {/* 히스토리 섹션 */}
         {histories.length > 0 && (
-          <section className="greensupia-history greensupia-section">
-            <h2 className="greensupia-contact__title">회사 연혁</h2>
+          <section className="biode-history biode-section">
+            <h2 className="biode-contact__title">회사 연혁</h2>
             <div className="bg-white rounded-lg shadow-sm border p-8 text-center">
               <div className="max-w-4xl mx-auto">
-                <div className="greensupia-history__timeline">
+                <div className="biode-history__timeline">
                   {Object.entries(
                     histories.reduce((acc, history) => {
                       if (!acc[history.year]) {
@@ -743,20 +818,20 @@ export default function GreensupiaHomePage() {
                     .map(([year, yearHistories]) => (
                       <div
                         key={year}
-                        className="greensupia-history__year-group"
+                        className="biode-history__year-group"
                       >
-                        <h3 className="greensupia-history__year-title">
+                        <h3 className="biode-history__year-title">
                           {year}
                         </h3>
-                        <div className="greensupia-history__year-content">
+                        <div className="biode-history__year-content">
                           {yearHistories
                             .sort((a, b) => a.sortOrder - b.sortOrder)
                             .map((history) => (
                               <div
                                 key={history.id}
-                                className="greensupia-history__item"
+                                className="biode-history__item"
                               >
-                                <p className="greensupia-history__description">
+                                <p className="biode-history__description">
                                   {history.description}
                                 </p>
                               </div>
@@ -771,46 +846,46 @@ export default function GreensupiaHomePage() {
         )}
 
         {/* 오시는길 섹션 */}
-        <section className="greensupia-contact">
-          <h2 className="greensupia-contact__title">오시는 길</h2>
-          <div className="greensupia-contact__container">
-            <div className="greensupia-contact__content">
+        <section className="biode-contact">
+          <h2 className="biode-contact__title">오시는 길</h2>
+          <div className="biode-contact__container">
+            <div className="biode-contact__content">
               {/* 주소 정보 카드 */}
-              <div className="greensupia-contact__info">
-                <div className="greensupia-contact__card">
-                  <h3 className="greensupia-contact__company">Greensupia</h3>
-                  <div className="greensupia-contact__details">
-                    <div className="greensupia-contact__item">
+              <div className="biode-contact__info">
+                <div className="biode-contact__card">
+                  <h3 className="biode-contact__company">BIODE</h3>
+                  <div className="biode-contact__details">
+                    <div className="biode-contact__item">
                       <strong>도로명</strong>
                       <p>서울특별시 강남구 테헤란로 123</p>
                     </div>
-                    <div className="greensupia-contact__item">
+                    <div className="biode-contact__item">
                       <strong>지번</strong>
                       <p>서울특별시 강남구 역삼동 123-45</p>
                     </div>
-                    <div className="greensupia-contact__item">
+                    <div className="biode-contact__item">
                       <strong>우편번호</strong>
                       <p>06123</p>
                     </div>
-                    <div className="greensupia-contact__item">
+                    <div className="biode-contact__item">
                       <strong>전화</strong>
                       <p>02-1234-5678</p>
                     </div>
-                    <div className="greensupia-contact__item">
+                    <div className="biode-contact__item">
                       <strong>이메일</strong>
-                      <p>info@greensupia.com</p>
+                      <p>info@biode.com</p>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* 지도 카드 */}
-              <div className="greensupia-contact__map">
-                <div className="greensupia-contact__card">
-                  <h3 className="greensupia-contact__location">위치</h3>
-                  <div className="greensupia-map__container">
-                    <div id="map" className="greensupia-map__element">
-                      <div className="greensupia-map__placeholder">
+              <div className="biode-contact__map">
+                <div className="biode-contact__card">
+                  <h3 className="biode-contact__location">위치</h3>
+                  <div className="biode-map__container">
+                    <div id="map" className="biode-map__element">
+                      <div className="biode-map__placeholder">
                         <div className="placeholder-content">
                           <svg fill="currentColor" viewBox="0 0 20 20">
                             <path

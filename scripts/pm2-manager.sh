@@ -2,7 +2,7 @@
 
 # ========================================
 # PM2 프로세스 관리 스크립트 (간단 버전)
-# Greensupia Next.js용
+# BIODE Next.js용
 # ========================================
 
 # 색상 정의
@@ -84,7 +84,7 @@ start_app() {
 stop_app() {
     log_info "애플리케이션을 중지합니다..."
     
-    if pm2 stop greensupia; then
+    if pm2 stop biode; then
         log_success "애플리케이션이 중지되었습니다"
     else
         log_warning "애플리케이션이 이미 중지되었거나 존재하지 않습니다"
@@ -95,7 +95,7 @@ stop_app() {
 restart_app() {
     log_info "애플리케이션을 재시작합니다..."
     
-    if pm2 restart greensupia; then
+    if pm2 restart biode; then
         log_success "애플리케이션이 재시작되었습니다"
     else
         log_error "애플리케이션 재시작 실패"
@@ -114,7 +114,7 @@ show_status() {
 # 로그 확인
 show_logs() {
     log_info "최근 50줄의 로그를 확인합니다..."
-    pm2 logs greensupia --lines 50
+    pm2 logs biode --lines 50
 }
 
 # 초기 설정

@@ -55,25 +55,25 @@ export default function Header() {
 
   return (
     <header
-      className={`greensupia-header ${
-        isScrolled ? "greensupia-header--scrolled" : ""
+      className={`biode-header ${
+        isScrolled ? "biode-header--scrolled" : ""
       }`}
     >
-      <div className="greensupia-header__container">
-        <div className="greensupia-header__content">
+      <div className="biode-header__container">
+        <div className="biode-header__content">
           {/* 로고 */}
-          <Link href="/" className="greensupia-header__logo">
-            <div className="greensupia-header__logo-icon">G</div>
-            <span className="greensupia-header__logo-text">Greensupia</span>
+          <Link href="/" className="biode-header__logo">
+            <div className="biode-header__logo-icon">G</div>
+            <span className="biode-header__logo-text">BIODE</span>
           </Link>
 
           {/* 데스크톱 네비게이션 */}
-          <nav className="greensupia-header__nav">
+          <nav className="biode-header__nav">
             {menuItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="greensupia-header__nav-item"
+                className="biode-header__nav-item"
               >
                 {item.label}
               </Link>
@@ -82,7 +82,7 @@ export default function Header() {
 
           {/* 모바일 메뉴 토글 */}
           <button
-            className="greensupia-header__mobile-toggle"
+            className="biode-header__mobile-toggle"
             onClick={toggleMobileMenu}
             aria-label="메뉴 열기"
             aria-expanded={isMobileMenuOpen}
@@ -93,15 +93,15 @@ export default function Header() {
 
         {/* 모바일 메뉴 */}
         <div
-          className={`greensupia-header__mobile-menu ${
-            isMobileMenuOpen ? "greensupia-header__mobile-menu--open" : ""
+          className={`biode-header__mobile-menu ${
+            isMobileMenuOpen ? "biode-header__mobile-menu--open" : ""
           }`}
         >
           {menuItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="greensupia-header__nav-item"
+              className="biode-header__nav-item"
               onClick={closeMobileMenu}
             >
               {item.label}

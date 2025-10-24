@@ -44,7 +44,7 @@ export default function NoticePage() {
 
   if (loading) {
     return (
-      <div className="greensupia-notice">
+      <div className="biode-notice">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto"></div>
@@ -56,23 +56,23 @@ export default function NoticePage() {
   }
 
   return (
-    <div className="greensupia-notice">
-      <div className="greensupia-notice__container">
+    <div className="biode-notice">
+      <div className="biode-notice__container">
         {/* 페이지 헤더 */}
-        <div className="greensupia-notice__header">
-          <div className="greensupia-notice__header-content">
-            <h1 className="greensupia-notice__title">공지사항</h1>
-            <p className="greensupia-notice__description">
+        <div className="biode-notice__header">
+          <div className="biode-notice__header-content">
+            <h1 className="biode-notice__title">공지사항</h1>
+            <p className="biode-notice__description">
               중요한 소식과 업데이트를 확인하세요
             </p>
           </div>
         </div>
 
         {/* 공지사항 목록 */}
-        <div className="greensupia-notice__list">
+        <div className="biode-notice__list">
           {notices.length === 0 ? (
-            <div className="greensupia-notice__empty">
-              <div className="greensupia-notice__empty-icon">
+            <div className="biode-notice__empty">
+              <div className="biode-notice__empty-icon">
                 <svg
                   className="mx-auto h-12 w-12"
                   fill="none"
@@ -87,29 +87,29 @@ export default function NoticePage() {
                   />
                 </svg>
               </div>
-              <h3 className="greensupia-notice__empty-title">
+              <h3 className="biode-notice__empty-title">
                 등록된 공지사항이 없습니다
               </h3>
-              <p className="greensupia-notice__empty-description">
+              <p className="biode-notice__empty-description">
                 새로운 공지사항이 등록되면 여기에 표시됩니다.
               </p>
             </div>
           ) : (
             notices.map((notice) => (
-              <div key={notice.id} className="greensupia-notice__card">
-                <div className="greensupia-notice__card-content">
+              <div key={notice.id} className="biode-notice__card">
+                <div className="biode-notice__card-content">
                   {/* 헤더 영역 */}
-                  <div className="greensupia-notice__card-header">
-                    <div className="greensupia-notice__card-title-section">
-                      <div className="greensupia-notice__card-title-row">
+                  <div className="biode-notice__card-header">
+                    <div className="biode-notice__card-title-section">
+                      <div className="biode-notice__card-title-row">
                         {notice.isPinned && (
-                          <span className="greensupia-notice__pinned-badge">
+                          <span className="biode-notice__pinned-badge">
                             📌 상단고정
                           </span>
                         )}
                         <Link
-                          href={`/greensupia/notice/${notice.id}`}
-                          className="greensupia-notice__card-title"
+                          href={`/biode/notice/${notice.id}`}
+                          className="biode-notice__card-title"
                         >
                           {notice.title}
                         </Link>
@@ -118,27 +118,27 @@ export default function NoticePage() {
                   </div>
 
                   {/* 메타 정보 */}
-                  <div className="greensupia-notice__meta">
-                    <div className="greensupia-notice__meta-item">
+                  <div className="biode-notice__meta">
+                    <div className="biode-notice__meta-item">
                       <span>{notice.author}</span>
                     </div>
-                    <div className="greensupia-notice__meta-item">
+                    <div className="biode-notice__meta-item">
                       <span>{formatDate(notice.createdAt)}</span>
                     </div>
-                    <div className="greensupia-notice__meta-item">
+                    <div className="biode-notice__meta-item">
                       <span>조회 {notice.viewCount}</span>
                     </div>
                   </div>
 
                   {/* 첨부파일 */}
                   {notice.attachments && notice.attachments.length > 0 && (
-                    <div className="greensupia-notice__attachments">
-                      <div className="greensupia-notice__attachments-list">
+                    <div className="biode-notice__attachments">
+                      <div className="biode-notice__attachments-list">
                         {notice.attachments.map((attachment) => (
                           <a
                             key={attachment.id}
                             href={`/api/notices/attachments/${attachment.id}/download`}
-                            className="greensupia-notice__attachment-link"
+                            className="biode-notice__attachment-link"
                             download
                           >
                             📎 {attachment.fileName}
@@ -155,7 +155,7 @@ export default function NoticePage() {
 
         {/* 페이지네이션 */}
         {totalPages > 1 && (
-          <div className="greensupia-notice__pagination">
+          <div className="biode-notice__pagination">
             <Pagination
               currentPage={page}
               totalPages={totalPages}

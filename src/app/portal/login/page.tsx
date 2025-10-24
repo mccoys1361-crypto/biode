@@ -96,7 +96,7 @@ export default function PortalLoginPage() {
         <div className="portal-login__header">
           <h1 className="portal-login__title">관리자 로그인</h1>
           <p className="portal-login__description">
-            그린수피아 관리자 페이지에 로그인하세요
+            비오드 관리자 페이지에 로그인하세요
           </p>
           {currentUserType !== "guest" && (
             <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">

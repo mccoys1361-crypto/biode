@@ -470,7 +470,7 @@ export class BackupManager {
 // 기본 백업 설정
 const defaultBackupConfig: BackupConfig = {
   databaseUrl: process.env.DATABASE_URL || "",
-  backupDir: process.env.BACKUP_DIR || "/home/greensupia/backups", // 절대 경로로 변경
+  backupDir: process.env.BACKUP_DIR || "/home/biode/backups", // 절대 경로로 변경
   maxBackups: parseInt(process.env.MAX_BACKUPS || "10"),
   backupInterval: parseInt(process.env.BACKUP_INTERVAL || "86400000"), // 24시간
   retentionDays: parseInt(process.env.BACKUP_RETENTION_DAYS || "30"),

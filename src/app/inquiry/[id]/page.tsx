@@ -136,7 +136,7 @@ export default function InquiryDetailPage() {
         <section className="inquiry-detail__error">
           <h1>문의글 상세</h1>
           <p>문의글을 찾을 수 없습니다.</p>
-          <Link href="/greensupia/inquiry" className="inquiry-detail__button">
+          <Link href="/biode/inquiry" className="inquiry-detail__button">
             목록으로 돌아가기
           </Link>
         </section>
@@ -151,14 +151,14 @@ export default function InquiryDetailPage() {
           <h1>문의글 상세</h1>
           <div className="inquiry-detail__actions">
             <Link
-              href="/greensupia/inquiry"
+              href="/biode/inquiry"
               className="inquiry-detail__button inquiry-detail__button--secondary"
             >
               목록으로
             </Link>
             {!inquiry.isAnswered && (
               <Link
-                href={`/greensupia/inquiry/write/${inquiry.id}`}
+                href={`/biode/inquiry/write/${inquiry.id}`}
                 className="inquiry-detail__button inquiry-detail__button--primary"
               >
                 수정하기
@@ -279,7 +279,7 @@ export default function InquiryDetailPage() {
               <div className="inquiry-detail__modal-actions">
                 <button
                   type="button"
-                  onClick={() => router.push("/greensupia/inquiry")}
+                  onClick={() => router.push("/biode/inquiry")}
                   className="inquiry-detail__modal-button inquiry-detail__modal-button--secondary"
                   disabled={isPasswordVerifying}
                 >

@@ -115,9 +115,9 @@ export function printEnvSetupGuide(): void {
   DATABASE_URL=mysql://username:password@host:port/database
 
 🌐 도메인 설정:
-  DOMAIN_URL=https://greensupia.com
-  MAIN_DOMAIN=greensupia.com
-  WWW_DOMAIN=www.greensupia.com
+  DOMAIN_URL=https://biode.com
+  MAIN_DOMAIN=biode.com
+  WWW_DOMAIN=www.biode.com
 
 📊 로깅 설정:
   LOG_LEVEL=info
@@ -136,12 +136,12 @@ export function printEnvSetupGuide(): void {
 📧 이메일 설정:
   GMAIL_USER=your-email@gmail.com
   GMAIL_APP_PASSWORD=your-gmail-app-password
-  EMAIL_FROM_NAME=Greensupia
+  EMAIL_FROM_NAME=BIODE
 
 🗺️ Google Maps API:
   NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your-google-maps-api-key
 
 🌍 사이트 URL:
-  NEXT_PUBLIC_SITE_URL=https://greensupia.com
+  NEXT_PUBLIC_SITE_URL=https://biode.com
 `);
 }

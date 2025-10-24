@@ -56,7 +56,7 @@ export default function NoticeWritePage() {
       const result = await response.json();
 
       if (result.success) {
-        router.push("/greensupia/notice");
+        router.push("/biode/notice");
       } else {
         alert(result.error || "공지사항을 저장하는 중 오류가 발생했습니다.");
       }

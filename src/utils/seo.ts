@@ -22,17 +22,17 @@ export function generateMetadata(config: SEOConfig): Metadata {
     type = "website",
     publishedTime,
     modifiedTime,
-    author = "Greensupia",
+    author = "BIODE",
   } = config;
 
   const fullUrl = url
-    ? `https://www.greensupia.com${url}`
-    : "https://www.greensupia.com";
+    ? `https://www.biode.com${url}`
+    : "https://www.biode.com";
 
   return {
     title: {
       default: title,
-      template: "%s | Greensupia",
+      template: "%s | BIODE",
     },
     description,
     keywords,
@@ -44,7 +44,7 @@ export function generateMetadata(config: SEOConfig): Metadata {
       address: false,
       telephone: false,
     },
-    metadataBase: new URL("https://www.greensupia.com"),
+    metadataBase: new URL("https://www.biode.com"),
     alternates: {
       canonical: url || "/",
     },
@@ -54,7 +54,7 @@ export function generateMetadata(config: SEOConfig): Metadata {
       url: fullUrl,
       title,
       description,
-      siteName: "Greensupia",
+      siteName: "BIODE",
       images: [
         {
           url: image,
@@ -108,36 +108,36 @@ export function generateArticleMetadata(article: {
   });
 }
 
-export function generateGreensupiaMetadata(config: SEOConfig): Metadata {
+export function generateBIODEMetadata(config: SEOConfig): Metadata {
   const {
     title,
     description,
     keywords = [],
-    image = "/greensupia-og.jpg",
+    image = "/biode-og.jpg",
     url = "",
     type = "website",
   } = config;
 
   const fullUrl = url
-    ? `https://www.greensupia.com${url}`
-    : "https://www.greensupia.com";
+    ? `https://www.biode.com${url}`
+    : "https://www.biode.com";
 
   return {
     title: {
       default: title,
-      template: "%s | Greensupia",
+      template: "%s | BIODE",
     },
     description,
     keywords: [...keywords, "친환경 비닐", "농업", "지속가능"],
-    authors: [{ name: "Greensupia" }],
-    creator: "Greensupia",
-    publisher: "Greensupia",
+    authors: [{ name: "BIODE" }],
+    creator: "BIODE",
+    publisher: "BIODE",
     formatDetection: {
       email: false,
       address: false,
       telephone: false,
     },
-    metadataBase: new URL("https://www.greensupia.com"),
+    metadataBase: new URL("https://www.biode.com"),
     alternates: {
       canonical: url || "/",
     },
@@ -147,7 +147,7 @@ export function generateGreensupiaMetadata(config: SEOConfig): Metadata {
       url: fullUrl,
       title,
       description,
-      siteName: "Greensupia",
+      siteName: "BIODE",
       images: [
         {
           url: image,
