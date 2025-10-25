@@ -136,16 +136,12 @@
   // 슬라이드 텍스트 오버레이
   &__content {
     position: absolute;
-    bottom: 4.5rem;          // 모바일: 하단에서 3rem
+    bottom: clamp(7rem, 5vh, 6rem);  // 뷰포트 높이에 따라 자동 조절
     left: 0;               // 이미지 꽉 채우기
     right: 0;              // 이미지 꽉 채우기
     color: #401F1D;        // BIODE 브랜드 컬러
     z-index: 5;
     text-align: center;
-
-    @media (min-width: 768px) {
-      bottom: 4rem;        // 데스크톱: 하단에서 4rem
-    }
   }
 
   &__text {
@@ -158,27 +154,18 @@
   }
 
   &__title {
-    font-size: 1.25rem;    // 모바일: 20px
+    font-size: clamp(1.5rem, 5vw, 5rem);  // 뷰포트 너비에 따라 자동 조절
     font-weight: 800;      // ExtraBold
     text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
     line-height: 1;        // 줄 높이 1
-
-    @media (min-width: 768px) {
-      font-size: 2rem;     // 데스크톱: 32px
-    }
   }
 
   &__description {
-    font-size: 0.7rem;       // 모바일: 작은 글씨
+    font-size: clamp(0.8rem, 2.5vw, 2.5rem);  // 뷰포트 너비에 따라 자동 조절
     font-weight: 300;        // Light
     text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
-    margin-right: 0.2rem;    // 다음 문장과 간격
+    margin-right: clamp(0.3rem, 0.8vw, 1rem);  // 간격도 자동 조절
     line-height: 1;        // 줄 높이 1
-
-    @media (min-width: 768px) {
-      font-size: 1.25rem;    // 데스크톱: 큰 글씨
-      margin-right: 0.75rem;
-    }
   }
 
   // 부드러운 등장 효과 (현재 슬라이드)
