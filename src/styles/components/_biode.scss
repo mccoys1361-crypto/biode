@@ -2026,4 +2026,32 @@
     background-color: #8F4C4A;
     margin-bottom: 0.5rem;
   }
+
+  &__text-section {
+    position: relative;
+    z-index: 30;
+    background-color: white;
+    padding: 0rem 2rem 4rem;
+    margin-top: -12rem;
+  }
+
+  &__text-container {
+    max-width: 1200px;
+    margin: 0 auto;
+
+    > div {
+      margin-bottom: 3rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &__description-text {
+    margin: 1rem 0 0 0;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    line-height: 1.8;
+    color: #374151;
+  }
 }
