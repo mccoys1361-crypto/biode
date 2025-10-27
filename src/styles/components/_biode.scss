@@ -1998,4 +1998,30 @@
     color: #401F1D;
     line-height: 1.2;
   }
+
+  &__overlay-standard {
+    position: absolute;
+    bottom: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    text-align: center;
+  }
+
+  &__standard-text {
+    margin: 0;
+    font-size: clamp(1rem, 4vw, 3rem);
+    font-weight: 700;
+    color: #8F4C4A;
+    line-height: 1.5;
+    white-space: nowrap;
+  }
+
+  &__standard-underline {
+    display: inline-block;
+    width: 100%;
+    height: 3px;
+    background-color: #8F4C4A;
+    margin-bottom: 0.5rem;
+  }
 }

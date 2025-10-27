@@ -34,6 +34,11 @@ export default function WowPrinciplePage() {
           <p className="wow-principle__philosophy-text">Biod</p>
           <p className="wow-principle__philosophy-text">Philosophy</p>
         </div>
+
+        {/* 추가 텍스트 오버레이 */}
+        <div className="wow-principle__overlay-standard">
+          <p className="wow-principle__standard-text"><span className="wow-principle__standard-underline"></span>올바른 선택의 기준을 만듭니다.</p>
+        </div>
       </section>
     </div>
   );
