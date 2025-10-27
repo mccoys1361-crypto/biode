@@ -50,10 +50,10 @@ export default function Header() {
   const menuItems = useMemo(
     () => [
       { href: "/only", label: "ONLY, 비오드", showDash: true, isBold: true },
-      { href: "/wow", label: "WOW, 비오드", showDash: true, isBold: true },
-      { href: "/principle", label: "비오드의 원칙", showDash: false, isBold: false },
-      { href: "/technology", label: "비오드의 기술", showDash: false, isBold: false },
-      { href: "/effect", label: "비오드의 효과", showDash: false, isBold: false },
+      { href: "/wow/principle", label: "WOW, 비오드", showDash: true, isBold: true },
+      { href: "/wow/principle", label: "비오드의 원칙", showDash: false, isBold: false },
+      { href: "/wow/technology", label: "비오드의 기술", showDash: false, isBold: false },
+      { href: "/wow/effect", label: "비오드의 효과", showDash: false, isBold: false },
       { href: "/experience", label: "놀라운 경험의 시작", showDash: true, isBold: true },
       { href: "/store", label: "STORE", showDash: true, isBold: true },
       { href: "/contact", label: "고객센터", showDash: true, isBold: true },
@@ -76,9 +76,9 @@ export default function Header() {
 
           {/* 데스크톱 네비게이션 */}
           <nav className="biode-header__nav">
-            {menuItems.map((item) => (
+            {menuItems.map((item, index) => (
               <Link
-                key={item.href}
+                key={`${item.href}-${index}`}
                 href={item.href}
                 className="biode-header__nav-item"
               >
@@ -112,9 +112,9 @@ export default function Header() {
             isMobileMenuOpen ? "biode-header__mobile-menu--open" : ""
           }`}
         >
-          {menuItems.map((item) => (
+          {menuItems.map((item, index) => (
             <Link
-              key={item.href}
+              key={`${item.href}-${index}`}
               href={item.href}
               className={`biode-header__mobile-menu-item ${
                 !item.isBold ? "biode-header__mobile-menu-item--normal" : ""
