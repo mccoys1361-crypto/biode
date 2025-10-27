@@ -310,18 +310,6 @@ export default function BIODEHomePage() {
     return () => clearInterval(id);
   }, [banners]);
 
-  const goToPrevBanner = () => {
-    if (!banners || banners.length === 0) return;
-    setCurrentBannerIndex((prev) =>
-      (prev - 1 + banners.length) % banners.length
-    );
-  };
-
-  const goToNextBanner = () => {
-    if (!banners || banners.length === 0) return;
-    setCurrentBannerIndex((prev) => (prev + 1) % banners.length);
-  };
-
   const goToBanner = (index: number) => {
     if (!banners || banners.length === 0) return;
     setCurrentBannerIndex(index % banners.length);
@@ -711,22 +699,6 @@ export default function BIODEHomePage() {
             {/* 배너 내 컨트롤 */}
             {banners.length > 1 && (
               <div className="biode-banner-controls">
-                <button
-                  type="button"
-                  aria-label="이전 배너"
-                  className="biode-banner-controls__prev"
-                  onClick={goToPrevBanner}
-                >
-                  ‹
-                </button>
-                <button
-                  type="button"
-                  aria-label="다음 배너"
-                  className="biode-banner-controls__next"
-                  onClick={goToNextBanner}
-                >
-                  ›
-                </button>
                 <div className="biode-banner-dots" role="tablist" aria-label="배너 선택">
                   {banners.map((_, idx) => (
                     <button
