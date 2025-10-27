@@ -4,9 +4,9 @@ export default function WowPrinciplePage() {
       {/* 상단 이미지 섹션 */}
       <section style={{ width: '100vw', position: 'relative', left: '50%', right: '50%', marginLeft: '-50vw', marginRight: '-50vw' }}>
         <img
-          src="/Homepage_2.png"
+          src="/Homepage_11.png"
           alt="비오드의 원칙"
-          style={{ width: '100%', height: 'auto', display: 'block', transform: 'scale(1.2) scaleX(-1)' }}
+          style={{ width: '100%', height: 'auto', display: 'block'}}
         />
 
         {/* 이미지 위 텍스트 오버레이 */}
