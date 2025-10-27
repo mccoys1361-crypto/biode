@@ -1933,3 +1933,42 @@
     }
   }
 }
+
+// WOW 비오드 - 원칙 페이지 스타일
+.wow-principle {
+  &__overlay {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+  }
+
+  &__content {
+    text-align: center;
+
+    p {
+      margin: 0;
+      font-size: clamp(0.5rem, 2.5vw, 3rem);
+      font-weight: 700;
+      line-height: 1.5;
+      white-space: nowrap;
+    }
+  }
+
+  &__text--primary {
+    color: #8F4C4A;
+  }
+
+  &__text--secondary {
+    color: #401F1D;
+  }
+
+  &__text--largest {
+    font-size: clamp(1rem, 5vw, 4rem) !important;
+  }
+
+  &__text--large {
+    font-size: clamp(0.8rem, 4vw, 3.5rem) !important;
+  }
+}
