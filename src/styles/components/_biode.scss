@@ -1936,6 +1936,12 @@
 
 // WOW 비오드 - 원칙 페이지 스타일
 .wow-principle {
+  &__section {
+    img {
+      border-bottom-left-radius: 0 !important;
+    }
+  }
+
   &__overlay {
     position: absolute;
     bottom: 2%;
@@ -1970,5 +1976,22 @@
 
   &__text--large {
     font-size: clamp(0.8rem, 4vw, 3.5rem) !important;
+  }
+
+  &__overlay-philosophy {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    text-align: center;
+  }
+
+  &__philosophy-text {
+    margin: 0;
+    font-size: clamp(1.5rem, 6vw, 5rem);
+    font-weight: 800;
+    color: #401F1D;
+    line-height: 1.2;
   }
 }
