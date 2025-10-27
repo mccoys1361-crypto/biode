@@ -49,9 +49,14 @@ export default function Header() {
   // 메뉴 아이템 메모이제이션
   const menuItems = useMemo(
     () => [
-      { href: "/", label: "홈" },
-      { href: "/notice", label: "공지사항" },
-      { href: "/inquiry", label: "문의하기" },
+      { href: "/only", label: "ONLY, 비오드", showDash: true, isBold: true },
+      { href: "/wow", label: "WOW, 비오드", showDash: true, isBold: true },
+      { href: "/principle", label: "비오드의 원칙", showDash: false, isBold: false },
+      { href: "/technology", label: "비오드의 기술", showDash: false, isBold: false },
+      { href: "/effect", label: "비오드의 효과", showDash: false, isBold: false },
+      { href: "/experience", label: "놀라운 경험의 시작", showDash: true, isBold: true },
+      { href: "/store", label: "STORE", showDash: true, isBold: true },
+      { href: "/contact", label: "고객센터", showDash: true, isBold: true },
     ],
     []
   );
@@ -111,9 +116,12 @@ export default function Header() {
             <Link
               key={item.href}
               href={item.href}
-              className="biode-header__nav-item"
+              className={`biode-header__mobile-menu-item ${
+                !item.isBold ? "biode-header__mobile-menu-item--normal" : ""
+              }`}
               onClick={closeMobileMenu}
             >
+              {item.showDash && <span className="biode-header__dash">- </span>}
               {item.label}
             </Link>
           ))}
