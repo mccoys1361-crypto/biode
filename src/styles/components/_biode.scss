@@ -2054,4 +2054,65 @@
     line-height: 1.8;
     color: #374151;
   }
+
+  &__policy-section {
+    background-color: white;
+    padding: 1rem 2rem 4rem;
+  }
+
+  &__policy-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  &__policy-title {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #1f2937;
+    white-space: nowrap;
+  }
+
+  &__policy-highlight {
+    background-color: #401F1D;
+    color: white;
+    padding: 0.2rem 0.2rem;
+    font-size: 0.85em;
+  }
+
+  &__policy-item {
+    margin-bottom: 3rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__policy-number {
+    background-color: #8F4C4A;
+    color: white;
+    padding: 1rem 2rem;
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    border-radius: 0 50px 50px 0;
+    display: inline-block;
+  }
+
+  &__policy-text {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    line-height: 1.8;
+    color: #374151;
+    margin-bottom: 0.8rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    strong {
+      font-weight: 700;
+      color: #1f2937;
+    }
+  }
 }
