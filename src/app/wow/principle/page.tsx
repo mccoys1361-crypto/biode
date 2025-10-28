@@ -84,8 +84,8 @@ export default function WowPrinciplePage() {
 
           <div className="wow-principle__policy-item">
             <h3 className="wow-principle__policy-number">03. 찾아가는 연구정책</h3>
-            <p className="wow-principle__policy-text"><strong>비오드는 우리가 만든 제품에 대한 자부심이 아주 큽니다.</strong></p>
-            <p className="wow-principle__policy-text">출시하기 전부터 우리는 수많은 반려동물 주인님들을 만나러 다녔습니다. 급여 후 변화되는 몸 상태와 변성분을 꼼꼼히 분석하기 위해서였습니다. 저희는 구매하신 소비자분들에게 허락을 받은 후 소정의 선물을 들고 찾아갑니다. 어떤 변화가 있는지에 대한 의견과 소망의 문만만 주시면 됩니다.</p>
+            <p className="wow-principle__policy-text"><strong>비오드는 우리가 만든 제품에 대한 자부심이 아주 크답니다.</strong></p>
+            <p className="wow-principle__policy-text">출시하기 전부터 우리는 수많은 반려동물 주인님들을 만나러 다녔습니다. 급여 후 변화되는 몸 상태와 변성분을 꼼꼼히 분석하기 위해서였습니다. 저희는 구매하신 소비자분들에게 허락을 받은 후 소정의 선물을 들고 찾아갑니다. 어떤 변화가 있는지에 대한 의견과 소량의 분변만 주시면 됩니다.</p>
           </div>
         </div>
       </section>
