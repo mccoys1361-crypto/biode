@@ -1,0 +1,88 @@
+// Display
+@mixin flex(
+  $flex: flex,
+  $align: center,
+  $justify: flex-start,
+  $direction: row,
+  $wrap:nowrap
+) {
+  display: $flex;
+  flex-wrap: $wrap;
+  align-items: $align;
+  justify-content: $justify;
+  flex-direction: $direction;
+}
+
+// media query
+$tablet: 768px;
+$note: 1024px;
+$desktop: 1420px;
+
+@mixin tablet {
+  @media (max-width: ($desktop - 1)) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $desktop) {
+    @content;
+  }
+}
+
+// margin, padding helper
+$spacemounts: (
+  0,
+  5,
+  8,
+  10,
+  12,
+  15,
+  16,
+  20,
+  24,
+  30,
+  32,
+  35,
+  40,
+  45,
+  50,
+  56,
+  72,
+  80,
+  100
+);
+$sides: (top, bottom, left, right);
+
+@each $space in $spacemounts {
+  @each $side in $sides {
+    .m#{str-slice($side, 0, 1)}#{$space} {
+      margin-#{$side}: #{$space}px !important;
+    }
+
+    .p#{str-slice($side, 0, 1)}#{$space} {
+      padding-#{$side}: #{$space}px !important;
+    }
+  }
+}
+.fc-brown {
+  color: #8f4c4a;
+}
+.align-righ {
+  text-align: right;
+}
+.align-left {
+  text-align: left;
+}
+.align-center {
+  text-align: center;
+}
+
+.title-40 {
+  font-size: 4rem;
+  font-weight: 800;
+}
+
+.fs-17 {
+  font-size: 1.7rem;
+}

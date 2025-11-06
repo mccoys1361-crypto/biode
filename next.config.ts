@@ -1,4 +1,5 @@
-import type { NextConfig } from "next";
+import type {NextConfig} from "next";
+import path from "path";
 
 const nextConfig: NextConfig = {
   // deprecated된 옵션 제거
@@ -131,12 +132,12 @@ const nextConfig: NextConfig = {
   // 웹팩 최적화
   webpack: (
     config: Record<string, unknown>,
-    { dev, isServer }: { dev: boolean; isServer: boolean }
+    {dev, isServer}: {dev: boolean; isServer: boolean}
   ) => {
     if (!dev && !isServer) {
       // 프로덕션 빌드 최적화
       const webpackConfig = config as {
-        optimization: { splitChunks: { cacheGroups: Record<string, unknown> } };
+        optimization: {splitChunks: {cacheGroups: Record<string, unknown>}};
       };
       if (webpackConfig.optimization?.splitChunks?.cacheGroups) {
         webpackConfig.optimization.splitChunks.cacheGroups = {
@@ -150,6 +151,10 @@ const nextConfig: NextConfig = {
       }
     }
     return config;
+  },
+
+  sassOptions: {
+    includePaths: [path.join(process.cwd(), "src/styles")],
   },
 };
 

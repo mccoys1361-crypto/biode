@@ -1,10 +1,30 @@
 export default function WowEffectPage() {
   return (
-    <div className="container mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold mb-8">WOW, 비오드 - 효과</h1>
-      <div className="prose max-w-none">
-        <p>비오드의 효과 페이지입니다.</p>
-      </div>
+    <div>
+      <section className="img-section">
+        <img src="/effect/effect_01.png" className="pc" />
+      </section>
+      <section className="img-section">
+        <img src="/effect/effect_02.png" className="pc" />
+      </section>
+      <section className="img-section">
+        <img src="/effect/effect_03.png" className="pc" />
+      </section>
+      <section className="img-section">
+        <img src="/effect/effect_04.png" className="pc" />
+      </section>
+      <section className="img-section">
+        <img src="/effect/effect_05.png" className="pc" />
+      </section>
+      <section className="img-section">
+        <img src="/effect/effect_06.png" className="pc" />
+      </section>
+      <section className="img-section">
+        <img src="/effect/effect_07.png" className="pc" />
+      </section>
+      <section className="img-section">
+        <img src="/effect/effect_08.png" className="pc" />
+      </section>
     </div>
   );
 }
