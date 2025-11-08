@@ -26,6 +26,7 @@
 // TipTap 에디터 스타일
 @use "components/tiptap-editor";
 @use "components/contents"; // 추가
+@use "components/only";
 // CSS 변수 정의 - 백조 브랜드 컬러 팔레트
 :root {
   // 기본 색상
@@ -1485,5 +1486,86 @@ body.admin-portal {
         @extend .btn-outline;
       }
     }
+  }
+}
+
+// PC 배너 이미지 스타일
+.biode-pc-banner-image {
+  background-color: #ffffff;
+  padding: 0;
+  margin: 0;
+
+  &__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    background-color: #ffffff;
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+// Footer 스타일
+.biode-footer {
+  &__pc {
+    display: none;
+    position: relative;
+
+    @media (min-width: 769px) {
+      display: block;
+    }
+  }
+
+  &__pc-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  &__pc-circle {
+    position: absolute;
+    top: 36%;
+    right: 47px;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    border: none;
+    padding: 0;
+    outline: none;
+  }
+
+  &__mobile {
+    display: block;
+    position: relative;
+
+    @media (min-width: 769px) {
+      display: none;
+    }
+  }
+
+  &__mobile-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  &__mobile-circle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    border: none;
+    padding: 0;
+    outline: none;
   }
 }

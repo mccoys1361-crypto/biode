@@ -18,6 +18,24 @@
   // footer 스타일은 .biode-footer 클래스에서 직접 관리
 }
 
+// PC 버전 전용 배너 하단 이미지
+.biode-pc-banner-image {
+  display: none; // 모바일에서는 숨김
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  @media (min-width: 1024px) {
+    display: block; // PC에서만 표시
+  }
+
+  &__img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
 // 전체 화면 너비 섹션: 3개 이미지(한 줄 하나, 전체 폭)
 .biode-triple-images {
   width: 100vw;           // 화면 폭에 맞춤
@@ -67,6 +85,11 @@
   margin-top: 0;
   margin-bottom: 0;
   padding: 0;
+
+  // PC에서는 숨김
+  @media (min-width: 1024px) {
+    display: none;
+  }
 
   &__viewport {
     height: 100vh;                 // 섹션 = 뷰포트 높이

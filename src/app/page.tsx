@@ -646,17 +646,17 @@ export default function BIODEHomePage() {
           name: "BIODE",
           url: "https://www.biode.com",
           description:
-            "BIODE는 친환경 비닐 제작업체로, 지속가능한 농업을 위한 혁신적인 솔루션을 제공합니다.",
+            "비오드(BIODE)는 과학적 데이터에 근거한 세계 최고 수준의 반려동물 유산균 솔루션을 제공합니다. 라이트핏 펫 유산균으로 반려동물의 건강한 삶을 지켜드립니다.",
           logo: "https://www.biode.com/logo.png",
           address: {
-            streetAddress: "테헤란로 123",
-            addressLocality: "강남구",
-            addressRegion: "서울특별시",
-            postalCode: "06123",
+            streetAddress: "소하로 190 G타워 1217",
+            addressLocality: "광명시",
+            addressRegion: "경기도",
+            postalCode: "",
             addressCountry: "KR",
           },
           contactPoint: {
-            telephone: "+82-2-1234-5678",
+            telephone: "+82-10-8104-7181",
             contactType: "customer service",
           },
         }}
@@ -718,16 +718,13 @@ export default function BIODEHomePage() {
         </section>
       )}
 
-      {/*비오드 유산균 이야기*/}
-      <section className="biode-story" style={{backgroundImage: 'url(/IMG_0146.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat',height: '13vh'}}>
-        <div className="biode-story__container" style={{paddingTop: '2.5rem', paddingLeft: '2rem'}}>
-          <div className="biode-story__header">
-            <h2 className="biode-story__title" style={{color: '#8F4C4A', fontWeight: 800, fontSize: 'x-large'}}>비오드 유산균 이야기</h2>
-          </div>
-          <div className="biode-story__content-item">
-            <p style={{fontSize: 'large', float: 'right', paddingRight: '2rem', paddingTop: '0.5rem'}}><strong>BIODE</strong> Lactic Acid Bacteria Story</p>
-          </div>
-        </div>
+      {/* PC 버전 전용 배너 하단 이미지 */}
+      <section className="biode-pc-banner-image">
+        <img
+          src="/20250915_BOID_Homepage_1.png"
+          alt="BIODE PC Banner"
+          className="biode-pc-banner-image__img"
+        />
       </section>
 
       {/* 새 섹션: 한 번에 이미지 하나, 세로 스와이프/스크롤로 다음 이미지가 올라옴 */}
@@ -785,16 +782,8 @@ export default function BIODEHomePage() {
         {/* 비오드가 처음이시라구요 */}
         <section className="biode-first-time" style={{marginBottom: 0, paddingBottom: 0, minHeight: '36vh'}}>
           <div className="biode-first-time__container" style={{minHeight: '29vh'}}>
-            <div className="biode-first-time__header" style={{textAlign: 'center', marginBottom: '1rem', marginTop: '1rem', fontFamily: 'nanumSquare'}}>
-              <h1 className="biode-first-time__title" style={{fontWeight: 800}}>"비오드가 처음이시라구요</h1>
-            </div>
             <div className="biode-first-time__image-wrapper" style={{marginTop: 0}}>
-              <img src="/Homepage_6.png" alt="비오드 소개" className="biode-first-time__image" />
-              <div className="biode-first-time__subtitle">
-                <p>그렇다면 먼저,</p>
-                <p><span className="biode-first-time__subtitle--highlight">'경험한 분들의 이야기'</span>와</p>
-                <p>만나보세요!</p>
-              </div>
+              <img src="/first.png" alt="비오드 소개" className="biode-first-time__image" />
             </div>
           </div>
         </section>

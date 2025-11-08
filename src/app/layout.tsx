@@ -40,27 +40,30 @@ const nanumSquare = localFont({
 
 export const metadata: Metadata = {
   title: {
-    default: "비오드(BIODE) - 친환경 비닐 제작업체",
+    default: "비오드(BIODE) - 세계 최고 수준의 반려동물 유산균",
     template: "%s | 비오드(BIODE)",
   },
   description:
-    "비오드(BIODE)는 친환경 비닐 제작업체로, 지속가능한 농업을 위한 혁신적인 솔루션을 제공합니다. 환경을 생각하는 농업인의 선택입니다.",
+    "비오드(BIODE)는 과학적 데이터에 근거한 세계 최고 수준의 반려동물 유산균 솔루션을 제공합니다. 라이트핏 펫 유산균으로 반려동물의 건강한 삶을 지켜드립니다.",
   keywords: [
     "비오드",
     "BIODE",
-    "친환경 비닐",
-    "농업",
-    "지속가능",
-    "환경보호",
-    "농사용품",
-    "친환경 농자재",
-    "농업용 비닐",
-    "친환경 농업",
-    "지속가능한 농업",
-    "비닐하우스",
-    "농업용품 제조업",
-    "친환경 소재",
-    "농업 솔루션",
+    "반려동물 유산균",
+    "펫 유산균",
+    "라이트핏 펫 유산균",
+    "강아지 유산균",
+    "고양이 유산균",
+    "반려동물 건강식품",
+    "펫 프로바이오틱스",
+    "반려동물 헬스케어",
+    "반려동물 건강",
+    "펫 건강식",
+    "반려견 유산균",
+    "반려묘 유산균",
+    "프로바이오틱스",
+    "장 건강",
+    "면역력 강화",
+    "반려동물 영양제",
   ],
   authors: [{ name: "비오드(BIODE)" }],
   creator: "비오드(BIODE)",
@@ -75,31 +78,30 @@ export const metadata: Metadata = {
     canonical: "/",
     languages: {
       "ko-KR": "/",
-      "en-US": "/en",
     },
   },
   openGraph: {
     type: "website",
     locale: "ko_KR",
     url: "https://www.biode.com",
-    title: "비오드(BIODE) - 친환경 비닐 제작업체",
+    title: "비오드(BIODE) - 세계 최고 수준의 반려동물 유산균",
     description:
-      "비오드(BIODE)는 친환경 비닐 제작업체로, 지속가능한 농업을 위한 혁신적인 솔루션을 제공합니다.",
+      "과학적 데이터에 근거한 세계 최고 수준의 반려동물 유산균. 라이트핏 펫 유산균으로 반려동물의 건강한 삶을 지켜드립니다.",
     siteName: "비오드(BIODE)",
     images: [
       {
         url: "/biode-og.jpg",
         width: 1200,
         height: 630,
-        alt: "비오드 친환경 비닐",
+        alt: "비오드 반려동물 유산균",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "비오드(BIODE) - 친환경 비닐 제작업체",
+    title: "비오드(BIODE) - 세계 최고 수준의 반려동물 유산균",
     description:
-      "비오드(BIODE)는 친환경 비닐 제작업체로, 지속가능한 농업을 위한 혁신적인 솔루션을 제공합니다.",
+      "과학적 데이터에 근거한 세계 최고 수준의 반려동물 유산균. 라이트핏 펫 유산균으로 반려동물의 건강한 삶을 지켜드립니다.",
     images: ["/biode-og.jpg"],
   },
   robots: {
@@ -134,10 +136,6 @@ export default function RootLayout({
         {/* 방문자 로그 자동 기록 */}
         <VisitorLogger />
 
-        {/* Google Analytics */}
-        <GoogleAnalytics
-          GA_MEASUREMENT_ID={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || ""}
-        />
       </body>
     </html>
   );

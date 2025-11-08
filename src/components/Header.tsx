@@ -8,6 +8,8 @@ export default function Header() {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isWowSubmenuOpen, setIsWowSubmenuOpen] = useState(true);
+  const [isPcMenuOpen, setIsPcMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(
     undefined
@@ -41,22 +43,29 @@ export default function Header() {
     setIsMobileMenuOpen((prev) => !prev);
   }, []);
 
+  // PC 메뉴 토글
+  const togglePcMenu = useCallback(() => {
+    setIsPcMenuOpen((prev) => !prev);
+  }, []);
+
   // 메뉴 닫기 함수
   const closeMobileMenu = useCallback(() => {
     setIsMobileMenuOpen(false);
+    setIsWowSubmenuOpen(false);
   }, []);
 
-  // 메뉴 아이템 메모이제이션
-  const menuItems = useMemo(
+  // WOW 서브메뉴 토글
+  const toggleWowSubmenu = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsWowSubmenuOpen((prev) => !prev);
+  }, []);
+
+  // 서브메뉴 항목
+  const wowSubmenuItems = useMemo(
     () => [
-      { href: "/only", label: "ONLY, 비오드", showDash: true, isBold: true },
-      { href: "/wow/principle", label: "WOW, 비오드", showDash: true, isBold: true },
-      { href: "/wow/principle", label: "비오드의 원칙", showDash: false, isBold: false },
-      { href: "/wow/technology", label: "비오드의 기술", showDash: false, isBold: false },
-      { href: "/wow/effect", label: "비오드의 효과", showDash: false, isBold: false },
-      { href: "/experience", label: "놀라운 경험의 시작", showDash: true, isBold: true },
-      { href: "/store", label: "STORE", showDash: true, isBold: true },
-      { href: "/contact", label: "고객센터", showDash: true, isBold: true },
+      { href: "/wow/principle", label: "비오드의 원칙" },
+      { href: "/wow/technology", label: "비오드의 기술" },
+      { href: "/wow/effect", label: "비오드의 효과" },
     ],
     []
   );
@@ -71,21 +80,55 @@ export default function Header() {
         <div className="biode-header__content">
           {/* 로고 */}
           <Link href="/" className="biode-header__logo">
-            <span className="biode-header__logo-text">BIODE</span>
+            <img
+              src="/20250915_BOID_Homepage_1 - 08-11-2025 17-41-29.png"
+              alt="BIODE Logo"
+              className="biode-header__logo-image"
+            />
           </Link>
 
           {/* 데스크톱 네비게이션 */}
           <nav className="biode-header__nav">
-            {menuItems.map((item, index) => (
-              <Link
-                key={`${item.href}-${index}`}
-                href={item.href}
-                className="biode-header__nav-item"
-              >
-                {item.label}
-              </Link>
-            ))}
+            <div className="biode-header__nav-menu-wrapper">
+              <img
+                src="/메뉴.png"
+                alt="메뉴"
+                className="biode-header__nav-menu-image"
+              />
+              {/* 메뉴별 클릭 영역 */}
+              <Link href="/only" className="biode-header__nav-area biode-header__nav-area--1" aria-label="ONLY, 비오드" />
+
+              {/* WOW 메뉴 - 드롭다운 포함 */}
+              <div className="biode-header__nav-area biode-header__nav-area--2 biode-header__nav-area--has-submenu">
+                <Link href="/wow/principle" className="biode-header__nav-area-link" aria-label="WOW, 비오드" />
+                {/* PC 드롭다운 서브메뉴 */}
+                <div className="biode-header__submenu">
+                  {wowSubmenuItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="biode-header__submenu-item"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              <Link href="/experience" className="biode-header__nav-area biode-header__nav-area--6" aria-label="놀라운 경험의 시작" />
+              <Link href="/store" className="biode-header__nav-area biode-header__nav-area--7" aria-label="STORE" />
+              <Link href="/contact" className="biode-header__nav-area biode-header__nav-area--8" aria-label="고객센터" />
+            </div>
           </nav>
+
+          {/* PC 투명 div */}
+          <button
+            className="biode-header__pc-toggle"
+            onClick={togglePcMenu}
+            aria-label="메뉴 열기"
+            aria-expanded={isPcMenuOpen}
+          >
+          </button>
 
           {/* 모바일 메뉴 토글 */}
           <button
@@ -112,16 +155,88 @@ export default function Header() {
             isMobileMenuOpen ? "biode-header__mobile-menu--open" : ""
           }`}
         >
-          {menuItems.map((item, index) => (
-            <Link
-              key={`${item.href}-${index}`}
-              href={item.href}
-              className={`biode-header__mobile-menu-item ${
-                !item.isBold ? "biode-header__mobile-menu-item--normal" : ""
-              }`}
-              onClick={closeMobileMenu}
+          {/* ONLY, 비오드 */}
+          <Link
+            href="/only"
+            className="biode-header__mobile-menu-item"
+            onClick={closeMobileMenu}
+          >
+            <span className="biode-header__dash">- </span>
+            ONLY, 비오드
+          </Link>
+
+          {/* WOW, 비오드 - 아코디언 */}
+          <div className="biode-header__mobile-menu-accordion">
+            <button
+              className="biode-header__mobile-menu-item biode-header__mobile-menu-item--button"
+              onClick={toggleWowSubmenu}
             >
-              {item.showDash && <span className="biode-header__dash">- </span>}
+              <span className="biode-header__dash">- </span>
+              WOW, 비오드
+              <span className={`biode-header__mobile-menu-arrow ${isWowSubmenuOpen ? "biode-header__mobile-menu-arrow--open" : ""}`}>
+                ▼
+              </span>
+            </button>
+            {/* 서브메뉴 */}
+            <div className={`biode-header__mobile-submenu ${isWowSubmenuOpen ? "biode-header__mobile-submenu--open" : ""}`}>
+              {wowSubmenuItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="biode-header__mobile-menu-item biode-header__mobile-menu-item--normal biode-header__mobile-menu-item--sub"
+                  onClick={closeMobileMenu}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* 놀라운 경험의 시작 */}
+          <Link
+            href="/experience"
+            className="biode-header__mobile-menu-item"
+            onClick={closeMobileMenu}
+          >
+            <span className="biode-header__dash">- </span>
+            놀라운 경험의 시작
+          </Link>
+
+          {/* STORE */}
+          <Link
+            href="/store"
+            className="biode-header__mobile-menu-item"
+            onClick={closeMobileMenu}
+          >
+            <span className="biode-header__dash">- </span>
+            STORE
+          </Link>
+
+          {/* 고객센터 */}
+          <Link
+            href="/contact"
+            className="biode-header__mobile-menu-item"
+            onClick={closeMobileMenu}
+          >
+            <span className="biode-header__dash">- </span>
+            고객센터
+          </Link>
+        </div>
+
+        {/* PC 서브메뉴 - WOW 메뉴만 */}
+        <div
+          className={`biode-header__pc-menu ${
+            isPcMenuOpen ? "biode-header__pc-menu--open" : ""
+          }`}
+        >
+          {wowSubmenuItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="biode-header__mobile-menu-item biode-header__mobile-menu-item--normal"
+              onClick={() => setIsPcMenuOpen(false)}
+            >
+              <span className="biode-header__dash">- </span>
               {item.label}
             </Link>
           ))}

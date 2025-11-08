@@ -1,3 +1,24 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "고객센터 - 비오드 문의 및 상담",
+  description:
+    "비오드에 대해 궁금하신 점이 있으신가요? 온라인/오프라인 문의를 통해 상담받으실 수 있습니다. 경기도 광명시 소하로 190 G타워 1217 | 상담 전화: 010-8104-7181",
+  keywords: [
+    "비오드 문의",
+    "고객센터",
+    "비오드 상담",
+    "반려동물 유산균 상담",
+    "비오드 연락처",
+  ],
+  openGraph: {
+    title: "고객센터 - 비오드 문의 및 상담",
+    description:
+      "비오드에 대해 궁금하신 점이 있으신가요? 온라인/오프라인 문의를 통해 상담받으실 수 있습니다.",
+    url: "https://www.biode.com/contact",
+  },
+};
+
 export default function WowExperiencePage() {
   return (
     <div>

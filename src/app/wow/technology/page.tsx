@@ -1,3 +1,26 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "비오드의 기술 - 건강수명을 늘리는 놀라운 기술",
+  description:
+    "엄마의 눈으로 하나하나 따진 비오드의 기술. 성분 하나, 원료 하나까지 꼼꼼하게 챙긴 진짜 유산균. 매일 먹고 싶은 반려동물 유산균을 만들었습니다.",
+  keywords: [
+    "비오드 기술",
+    "반려동물 유산균 성분",
+    "안전한 유산균",
+    "꼼꼼한 제조",
+    "건강수명",
+    "진짜 유산균",
+    "반려동물 영양소",
+  ],
+  openGraph: {
+    title: "비오드의 기술 - 건강수명을 늘리는 놀라운 기술",
+    description:
+      "엄마의 눈으로 하나하나 따진 비오드의 기술. 성분 하나, 원료 하나까지 꼼꼼하게 챙긴 진짜 유산균.",
+    url: "https://www.biode.com/wow/technology",
+  },
+};
+
 export default function WowTechnologyPage() {
   return (
     <div>
