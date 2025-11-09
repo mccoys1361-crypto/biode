@@ -25,6 +25,8 @@ model banner {
   isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime
+
+  @@map("Banner")
 }
 
 model bannernews {
@@ -39,6 +41,8 @@ model bannernews {
   linkUrl   String?
   sortOrder Int       @default(0)
   startDate DateTime?
+
+  @@map("BannerNews")
 }
 
 model greeting {
@@ -48,6 +52,8 @@ model greeting {
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime
+
+  @@map("Greeting")
 }
 
 model history {
@@ -58,6 +64,8 @@ model history {
   description String   @db.Text
   isActive    Boolean  @default(true)
   sortOrder   Int      @default(0)
+
+  @@map("History")
 }
 
 model inquiry {
@@ -76,6 +84,7 @@ model inquiry {
 
   @@index([isAnswered, createdAt], map: "Inquiry_isAnswered_createdAt_idx")
   @@index([isSecret, isAnswered], map: "Inquiry_isSecret_isAnswered_idx")
+  @@map("Inquiry")
 }
 
 model notice {
@@ -89,6 +98,8 @@ model notice {
   createdAt        DateTime           @default(now())
   updatedAt        DateTime
   noticeattachment noticeattachment[]
+
+  @@map("Notice")
 }
 
 model noticeattachment {
@@ -103,6 +114,7 @@ model noticeattachment {
   notice        notice   @relation(fields: [noticeId], references: [id], onDelete: Cascade, map: "NoticeAttachment_noticeId_fkey")
 
   @@index([noticeId], map: "NoticeAttachment_noticeId_fkey")
+  @@map("NoticeAttachment")
 }
 
 model organizationchart {
@@ -111,6 +123,8 @@ model organizationchart {
   updatedAt DateTime
   imageUrl  String   @db.Text
   isActive  Boolean  @default(true)
+
+  @@map("OrganizationChart")
 }
 
 model video {
@@ -124,6 +138,8 @@ model video {
   isActive     Boolean  @default(true)
   createdAt    DateTime @default(now())
   updatedAt    DateTime
+
+  @@map("Video")
 }
 
 model visitorlog {
@@ -139,4 +155,5 @@ model visitorlog {
   @@index([timestamp])
   @@index([isBot])
   @@index([path])
+  @@map("VisitorLog")
 }
