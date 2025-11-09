@@ -89,7 +89,7 @@ export async function POST(request: NextRequest) {
     response.cookies.set("admin_session", sessionData, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: "lax",
       maxAge: 30 * 60, // 30분
       path: "/",
     });
@@ -97,7 +97,7 @@ export async function POST(request: NextRequest) {
     response.cookies.set("admin_token", "logged_in", {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: "lax",
       maxAge: 30 * 60, // 30분
       path: "/",
     });
