@@ -42,7 +42,6 @@ export async function PUT(
 
     const formData = await request.formData();
     const title = formData.get("title") as string;
-    const description = formData.get("description") as string;
     const imageUrl = formData.get("imageUrl") as string;
     const linkUrl = formData.get("linkUrl") as string;
     const sortOrder = formData.get("sortOrder")
@@ -52,14 +51,12 @@ export async function PUT(
 
     const updateData: {
       title?: string;
-      description?: string;
       imageUrl?: string;
       linkUrl?: string;
       sortOrder?: number;
       isActive?: boolean;
     } = {};
     if (title !== null) updateData.title = title;
-    if (description !== null) updateData.description = description;
     if (imageUrl !== null) updateData.imageUrl = imageUrl;
     if (linkUrl !== null) updateData.linkUrl = linkUrl;
     if (sortOrder !== undefined) updateData.sortOrder = sortOrder;
