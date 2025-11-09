@@ -12,16 +12,29 @@ export default function UserInfo() {
 
   const fetchUserInfo = async () => {
     try {
+      // localStorage 체크
+      const localUserType = localStorage.getItem("userType");
+      if (!localUserType || localUserType === "guest") {
+        console.log("[UserInfo] localStorage에 userType 없음 - guest로 설정");
+        setUserType("guest");
+        setLoading(false);
+        return;
+      }
+
       const response = await fetch("/api/auth/me");
       if (response.ok) {
         const data = await response.json();
+        console.log("[UserInfo] 사용자 정보:", data.userType);
         setUserType(data.userType || "guest");
       } else {
+        console.log("[UserInfo] API 응답 실패 - guest로 설정");
         setUserType("guest");
+        localStorage.removeItem("userType");
       }
     } catch (err) {
-      console.error("사용자 정보 가져오기 실패:", err);
+      console.error("[UserInfo] 사용자 정보 가져오기 실패:", err);
       setUserType("guest");
+      localStorage.removeItem("userType");
     } finally {
       setLoading(false);
     }
@@ -29,15 +42,21 @@ export default function UserInfo() {
 
   const handleLogout = async () => {
     try {
-      await fetch("/api/auth/logout", { method: "POST" });
+      console.log("[UserInfo] 로그아웃 시작");
+      const response = await fetch("/api/auth/logout", { method: "POST" });
+      console.log("[UserInfo] 로그아웃 API 응답:", response.status);
+
       localStorage.removeItem("userType");
       setUserType("guest");
-      // 로그아웃 후 페이지 새로고침
-      window.location.reload();
+
+      // 로그인 페이지로 이동
+      console.log("[UserInfo] 로그인 페이지로 이동");
+      window.location.href = "/portal/login";
     } catch (err) {
-      console.error("로그아웃 오류:", err);
+      console.error("[UserInfo] 로그아웃 오류:", err);
       localStorage.removeItem("userType");
       setUserType("guest");
+      window.location.href = "/portal/login";
     }
   };
 

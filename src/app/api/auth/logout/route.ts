@@ -9,17 +9,9 @@ export async function POST() {
       message: "로그아웃되었습니다.",
     });
 
-    const cookieOptions = {
-      httpOnly: true,
-      secure: false, // HTTP 환경에서도 작동하도록 설정
-      sameSite: "lax" as const,
-      maxAge: 0, // 즉시 만료
-      path: "/",
-    };
-
-    // 세션 쿠키 삭제
-    response.cookies.set("admin_token", "", cookieOptions);
-    response.cookies.set("admin_session", "", cookieOptions);
+    // 쿠키 삭제 (여러 방법 시도)
+    response.cookies.delete("admin_token");
+    response.cookies.delete("admin_session");
 
     console.log("[로그아웃] 쿠키 삭제 완료");
 

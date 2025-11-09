@@ -58,6 +58,7 @@ interface DashboardStats {
 }
 
 export default function AdminDashboard() {
+  // 초기값을 명시적으로 guest로 설정
   const [userType, setUserType] = useState<string>("guest");
   const [loading, setLoading] = useState(true);
 
@@ -121,12 +122,16 @@ export default function AdminDashboard() {
 
   const handleLogout = async () => {
     try {
-      await fetch("/api/auth/logout", { method: "POST" });
+      console.log("[대시보드] 로그아웃 시작");
+      const response = await fetch("/api/auth/logout", { method: "POST" });
+      console.log("[대시보드] 로그아웃 API 응답:", response.status);
+
       localStorage.removeItem("userType");
       // 로그아웃 후 로그인 페이지로 리다이렉트
+      console.log("[대시보드] 로그인 페이지로 이동");
       window.location.href = "/portal/login";
     } catch (err) {
-      console.error("로그아웃 오류:", err);
+      console.error("[대시보드] 로그아웃 오류:", err);
       localStorage.removeItem("userType");
       window.location.href = "/portal/login";
     }
@@ -150,21 +155,37 @@ export default function AdminDashboard() {
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
+        // localStorage 먼저 체크
+        const localUserType = localStorage.getItem("userType");
+        console.log("[대시보드] localStorage userType:", localUserType);
+
+        if (!localUserType || localUserType === "guest") {
+          console.log("[대시보드] guest로 설정");
+          setUserType("guest");
+          setLoading(false);
+          return;
+        }
+
         const response = await fetch("/api/auth/me");
         if (response.ok) {
           const data = await response.json();
+          console.log("[대시보드] API 응답 userType:", data.userType);
           setUserType(data.userType || "guest");
         } else {
+          console.log("[대시보드] API 실패 - guest로 설정");
           setUserType("guest");
+          localStorage.removeItem("userType");
         }
       } catch (err) {
-        console.error("사용자 정보 가져오기 실패:", err);
+        console.error("[대시보드] 사용자 정보 가져오기 실패:", err);
         setUserType("guest");
+        localStorage.removeItem("userType");
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchUserInfo();
-    setLoading(false);
   }, []);
 
   if (loading || visitorLoading || searchBotLoading || inquiryLoading) {
@@ -190,6 +211,9 @@ export default function AdminDashboard() {
       <div className="dashboard-header">
         <h1 className="dashboard-title">
           {userType === "admin" ? "관리자" : "게스트"} 대시보드
+          <small style={{ fontSize: '0.5em', marginLeft: '10px', color: '#666' }}>
+            (현재 userType: {userType})
+          </small>
         </h1>
 
         <p className="dashboard-subtitle">
@@ -326,68 +350,34 @@ export default function AdminDashboard() {
         </div>
       </section>
 
-      {/* 빠른 액션 */}
-      <section className="action-section card card-stats">
-        <h2 className="section-title">
-          {userType === "admin" ? "빠른 액션" : "메뉴"}
-        </h2>
-        <div className="action-buttons">
-          {userType === "admin" ? (
-            <>
-              <Link
-                href="/portal/banners"
-                className="action-button action-primary"
-              >
-                <span>🎨</span>배너 관리
-              </Link>
-              <Link
-                href="/portal/inquiry"
-                className="action-button action-purple"
-              >
-                <span>💬</span>
-                문의글 관리
-              </Link>
-              <Link
-                href="/portal/admin/add"
-                className="action-button action-dark"
-              >
-                <span>👤</span>
-                관리자 추가
-              </Link>
-            </>
-          ) : (
-            <>
-              <button
-                className="action-button action-primary action-disabled"
-                onClick={handleButtonClick}
-              >
-                <span>🎨</span>배너 관리
-              </button>
-              <button
-                className="action-button action-purple action-disabled"
-                onClick={handleButtonClick}
-              >
-                <span>💬</span>
-                문의글 관리
-              </button>
-              <button
-                className="action-button action-dark action-disabled"
-                onClick={handleButtonClick}
-              >
-                <span>👤</span>
-                관리자 추가
-              </button>
-            </>
-          )}
-        </div>
-        {userType === "guest" && (
-          <div className="guest-notice">
-            <p className="guest-notice-text">
-              💡 편집 기능을 사용하려면 버튼을 클릭하여 관리자로 로그인하세요.
-            </p>
+      {/* 빠른 액션 - 관리자만 표시 */}
+      {userType === "admin" && (
+        <section className="action-section card card-stats">
+          <h2 className="section-title">빠른 액션</h2>
+          <div className="action-buttons">
+            <Link
+              href="/portal/banners"
+              className="action-button action-primary"
+            >
+              <span>🎨</span>배너 관리
+            </Link>
+            <Link
+              href="/portal/inquiry"
+              className="action-button action-purple"
+            >
+              <span>💬</span>
+              문의글 관리
+            </Link>
+            <Link
+              href="/portal/admin/add"
+              className="action-button action-dark"
+            >
+              <span>👤</span>
+              관리자 추가
+            </Link>
           </div>
-        )}
-      </section>
+        </section>
+      )}
     </div>
   );
 }
