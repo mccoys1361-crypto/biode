@@ -11,12 +11,16 @@ export async function middleware(request: NextRequest) {
     // 관리자 페이지 인증 체크
     if (pathname.startsWith("/portal") && pathname !== "/portal/login") {
       const token = request.cookies.get("admin_token");
+      console.log(`[미들웨어] 경로: ${pathname}, 토큰: ${token?.value || "없음"}`);
 
-      if (!token) {
+      if (!token || token.value !== "logged_in") {
+        console.log(`[미들웨어] 인증 실패 - 로그인 페이지로 리다이렉트`);
         const loginUrl = new URL("/portal/login", request.url);
         loginUrl.searchParams.set("redirect", pathname);
         return NextResponse.redirect(loginUrl);
       }
+
+      console.log(`[미들웨어] 인증 성공 - 요청 허용`);
     }
 
     // Edge Runtime 호환성을 위해 process.env 사용 제거
