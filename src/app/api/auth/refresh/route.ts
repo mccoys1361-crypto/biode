@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
     // 쿠키 만료 시간 연장 (30분)
     response.cookies.set("admin_token", "logged_in", {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: false, // HTTP 환경에서도 작동하도록 설정
       sameSite: "lax",
       maxAge: 30 * 60,
       path: "/",
@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
 
     response.cookies.set("admin_session", adminSession, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: false, // HTTP 환경에서도 작동하도록 설정
       sameSite: "lax",
       maxAge: 30 * 60,
       path: "/",

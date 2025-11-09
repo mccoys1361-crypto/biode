@@ -86,22 +86,20 @@ export async function POST(request: NextRequest) {
 
     // 세션 쿠키 설정
     console.log("[로그인] 쿠키 설정 시작");
-    response.cookies.set("admin_session", sessionData, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      maxAge: 30 * 60, // 30분
-      path: "/",
-    });
 
-    response.cookies.set("admin_token", "logged_in", {
+    const cookieOptions = {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
+      secure: false, // HTTP 환경에서도 작동하도록 설정
+      sameSite: "lax" as const,
       maxAge: 30 * 60, // 30분
       path: "/",
-    });
+    };
+
+    response.cookies.set("admin_session", sessionData, cookieOptions);
+    response.cookies.set("admin_token", "logged_in", cookieOptions);
+
     console.log("[로그인] 쿠키 설정 완료");
+    console.log("[로그인] 쿠키 옵션:", cookieOptions);
 
     console.log("[로그인] 로그인 성공");
     return response;

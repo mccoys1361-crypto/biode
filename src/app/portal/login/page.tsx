@@ -85,9 +85,11 @@ export default function PortalLoginPage() {
         // 로그인 성공 알림
         alert(data.message || "로그인에 성공했습니다.");
 
-        // 로그인 성공 후 원래 페이지 또는 대시보드로 이동
+        // 쿠키가 설정될 시간을 주기 위해 약간 지연 후 페이지 새로고침으로 이동
         console.log("[로그인 페이지] 페이지 이동:", redirectUrl);
-        window.location.href = redirectUrl;
+        setTimeout(() => {
+          window.location.href = redirectUrl;
+        }, 100);
       } else {
         console.log("[로그인 페이지] 로그인 실패:", data.message);
         alert(data.message || "로그인에 실패했습니다.");

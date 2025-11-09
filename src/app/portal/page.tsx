@@ -72,14 +72,19 @@ export default function AdminDashboard() {
     { intervalMs: 120000, enabled: true }
   );
 
+  const { data: inquiryStats, loading: inquiryLoading } = useRealtimeStats(
+    () => fetch("/api/stats/inquiries").then((res) => res.json()),
+    { intervalMs: 120000, enabled: true }
+  );
+
   // 마지막 업데이트 시간 표시
   const [lastUpdateTime, setLastUpdateTime] = useState<Date>(new Date());
 
   useEffect(() => {
-    if (visitorStats || searchBotStats) {
+    if (visitorStats || searchBotStats || inquiryStats) {
       setLastUpdateTime(new Date());
     }
-  }, [visitorStats, searchBotStats]);
+  }, [visitorStats, searchBotStats, inquiryStats]);
 
   // 통계 데이터 통합
   const stats: DashboardStats = {
@@ -96,7 +101,7 @@ export default function AdminDashboard() {
     history: { total: 0, yearRange: { min: 2024, max: 2024 } },
     bannerNews: { total: 0, active: 0, inactive: 0 },
     notices: { total: 0, pinned: 0, active: 0, inactive: 0 },
-    inquiries: {
+    inquiries: inquiryStats || {
       total: 0,
       pending: 0,
       answered: 0,
@@ -117,11 +122,13 @@ export default function AdminDashboard() {
   const handleLogout = async () => {
     try {
       await fetch("/api/auth/logout", { method: "POST" });
+      localStorage.removeItem("userType");
       setUserType("guest");
       // 로그아웃 후 페이지 새로고침
       window.location.reload();
     } catch (err) {
       console.error("로그아웃 오류:", err);
+      localStorage.removeItem("userType");
       setUserType("guest");
     }
   };
@@ -161,7 +168,7 @@ export default function AdminDashboard() {
     setLoading(false);
   }, []);
 
-  if (loading || visitorLoading || searchBotLoading) {
+  if (loading || visitorLoading || searchBotLoading || inquiryLoading) {
     return (
       <section className="dashboard-loading" aria-label="로딩 중">
         <div className="loading-text" role="status" aria-live="polite">
@@ -286,111 +293,8 @@ export default function AdminDashboard() {
         </div>
       </section>
 
-      {/* 통계 카드들 */}
+      {/* 통계 카드들 - 문의글만 표시 */}
       <section className="stats-section" aria-label="시스템 통계">
-        {/* Todo 통계 */}
-        <div className="card card-stats">
-          <div className="stat-number">{stats.todos.total}</div>
-          <div className="stat-label">전체 할일</div>
-          <div className="stat-details">
-            완료: {stats.todos.completed} | 진행중: {stats.todos.pending}
-          </div>
-          <div className="progress-container">
-            <div className="progress-bar">
-              <div
-                className="progress-fill"
-                style={{ width: `${stats.todos.completionRate}%` }}
-              ></div>
-            </div>
-            <div className="progress-text">
-              완료율: {stats.todos.completionRate}%
-            </div>
-          </div>
-        </div>
-
-        {/* 조직도 통계 */}
-        <div className="card card-stats">
-          <div className="stat-number">{stats.organization.total}</div>
-          <div className="stat-label">조직 구성원</div>
-          <div className="stat-details">
-            부서: {stats.organization.departments?.length || 0}개
-          </div>
-          <div className="department-tags">
-            <div className="tag-container">
-              {stats.organization.departments
-                ?.slice(0, 3)
-                .map((dept, index) => (
-                  <span key={index} className="department-tag">
-                    {dept}
-                  </span>
-                ))}
-              {(stats.organization.departments?.length || 0) > 3 && (
-                <span className="department-tag-more">
-                  +{(stats.organization.departments?.length || 0) - 3}
-                </span>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {/* 히스토리 통계 */}
-        <div className="card card-stats">
-          <div className="stat-number">{stats.history.total}</div>
-          <div className="stat-label">회사 히스토리</div>
-          <div className="stat-details">
-            {stats.history.yearRange.min} - {stats.history.yearRange.max}
-          </div>
-          <div className="history-info">
-            <div className="status-text">
-              총 {stats.history.yearRange.max - stats.history.yearRange.min + 1}
-              년간의 기록
-            </div>
-          </div>
-        </div>
-
-        {/* 배너뉴스 통계 */}
-        <div className="card card-stats">
-          <div className="stat-number">{stats.bannerNews.total}</div>
-          <div className="stat-label">배너뉴스</div>
-          <div className="stat-details">
-            활성: {stats.bannerNews.active} | 비활성:{" "}
-            {stats.bannerNews.inactive}
-          </div>
-          <div className="status-tags">
-            <div className="tag-container">
-              <span className="status-tag status-active">
-                활성 {stats.bannerNews.active}
-              </span>
-              <span className="status-tag status-inactive">
-                비활성 {stats.bannerNews.inactive}
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* 공지사항 통계 */}
-        <div className="card card-stats">
-          <div className="stat-number">{stats.notices.total}</div>
-          <div className="stat-label">공지사항</div>
-          <div className="stat-details">
-            고정: {stats.notices.pinned} | 활성: {stats.notices.active} |
-            비활성: {stats.notices.inactive}
-          </div>
-          <div className="status-tags">
-            <div className="tag-container">
-              <span className="status-tag status-pinned">
-                고정 {stats.notices.pinned}
-              </span>
-              <span className="status-tag status-active">
-                활성 {stats.notices.active}
-              </span>
-              <span className="status-tag status-inactive">
-                비활성 {stats.notices.inactive}
-              </span>
-            </div>
-          </div>
-        </div>
-
         {/* 문의글 통계 */}
         <div className="card card-stats">
           <div className="stat-number">{stats.inquiries.total}</div>

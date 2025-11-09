@@ -30,11 +30,13 @@ export default function UserInfo() {
   const handleLogout = async () => {
     try {
       await fetch("/api/auth/logout", { method: "POST" });
+      localStorage.removeItem("userType");
       setUserType("guest");
       // 로그아웃 후 페이지 새로고침
       window.location.reload();
     } catch (err) {
       console.error("로그아웃 오류:", err);
+      localStorage.removeItem("userType");
       setUserType("guest");
     }
   };
