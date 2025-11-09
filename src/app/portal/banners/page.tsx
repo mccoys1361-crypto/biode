@@ -522,13 +522,6 @@ export default function BannerManagementPage() {
               />
             </div>
 
-            <div className="form-group">
-                설명 (HTML 편집 가능)
-              </label>
-              <TipTapEditor
-                placeholder="배너에 대한 설명을 입력하세요. (선택사항)"
-              />
-            </div>
 
             <div className="form-group">
               <label htmlFor="imageUrl" className="required">
@@ -663,13 +656,6 @@ export default function BannerManagementPage() {
               />
             </div>
 
-            <div className="form-group">
-                설명 (HTML 편집 가능)
-              </label>
-              <TipTapEditor
-                placeholder="배너에 대한 설명을 입력하세요. (선택사항)"
-              />
-            </div>
 
             <div className="form-group">
               <label htmlFor="edit-imageUrl" className="required">
