@@ -1,5 +1,5 @@
 -- CreateTable
-CREATE TABLE `visitorlog` (
+CREATE TABLE `VisitorLog` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `ip` VARCHAR(191) NULL,
     `userAgent` VARCHAR(191) NULL,

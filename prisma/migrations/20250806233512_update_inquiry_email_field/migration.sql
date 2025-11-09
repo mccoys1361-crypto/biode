@@ -1,2 +1,2 @@
 -- AlterTable
-ALTER TABLE `inquiry` MODIFY `email` TEXT NULL;
+ALTER TABLE `Inquiry` MODIFY `email` TEXT NULL;

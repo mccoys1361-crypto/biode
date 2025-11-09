@@ -1,6 +1,3 @@
--- AlterTable
-ALTER TABLE `todo` ADD COLUMN `dueDate` DATETIME(3) NULL;
-
 -- CreateTable
 CREATE TABLE `OrganizationChart` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
