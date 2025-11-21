@@ -4,7 +4,7 @@ module.exports = {
       name: "biode",
       script: "npm",
       args: "start",
-      cwd: "/home/biode",
+      cwd: "/root/biode",
       instances: 1,
       exec_mode: "fork",
       env: {

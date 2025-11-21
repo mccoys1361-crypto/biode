@@ -716,12 +716,21 @@ export default function BIODEHomePage() {
         </section>
       )}
 
-      {/* PC 버전 전용 배너 하단 이미지 */}
-      <section className="biode-pc-banner-image">
+      {/* 배너 하단 이미지 - PC 전용 */}
+      <section className="biode-banner-pc">
         <img
           src="/20250915_BOID_Homepage_1.png"
           alt="BIODE PC Banner"
-          className="biode-pc-banner-image__img"
+          className="biode-banner-pc__img"
+        />
+      </section>
+
+      {/* 배너 하단 이미지 - 모바일 전용 */}
+      <section className="biode-banner-mobile">
+        <img
+          src="/banner_after.png"
+          alt="BIODE Mobile Banner"
+          className="biode-banner-mobile__img"
         />
       </section>
 

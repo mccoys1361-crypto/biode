@@ -1489,24 +1489,6 @@ body.admin-portal {
   }
 }
 
-// PC 배너 이미지 스타일
-.biode-pc-banner-image {
-  background-color: #ffffff;
-  padding: 0;
-  margin: 0;
-
-  &__img {
-    display: block;
-    width: 100%;
-    height: auto;
-    background-color: #ffffff;
-  }
-
-  @media (max-width: 768px) {
-    display: none;
-  }
-}
-
 // Footer 스타일
 .biode-footer {
   &__pc {

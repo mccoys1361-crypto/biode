@@ -18,15 +18,33 @@
   // footer 스타일은 .biode-footer 클래스에서 직접 관리
 }
 
-// PC 버전 전용 배너 하단 이미지
-.biode-pc-banner-image {
-  display: none; // 모바일에서는 숨김
+// 배너 하단 이미지 - PC 전용
+.biode-banner-pc {
+  display: none;
   width: 100%;
   margin: 0;
   padding: 0;
 
   @media (min-width: 1024px) {
-    display: block; // PC에서만 표시
+    display: block;
+  }
+
+  &__img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+// 배너 하단 이미지 - 모바일 전용
+.biode-banner-mobile {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  @media (min-width: 1024px) {
+    display: none;
   }
 
   &__img {
