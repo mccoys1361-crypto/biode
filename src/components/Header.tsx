@@ -116,7 +116,7 @@ export default function Header() {
               </div>
 
               <Link href="/experience" className="biode-header__nav-area biode-header__nav-area--6" aria-label="놀라운 경험의 시작" />
-              <Link href="/store" className="biode-header__nav-area biode-header__nav-area--7" aria-label="STORE" />
+              <a href="https://naver.me/Fwj2cpxc" target="_blank" rel="noopener noreferrer" className="biode-header__nav-area biode-header__nav-area--7" aria-label="STORE" />
               <Link href="/contact" className="biode-header__nav-area biode-header__nav-area--8" aria-label="고객센터" />
             </div>
           </nav>
@@ -203,14 +203,16 @@ export default function Header() {
           </Link>
 
           {/* STORE */}
-          <Link
-            href="/store"
+          <a
+            href="https://naver.me/Fwj2cpxc"
+            target="_blank"
+            rel="noopener noreferrer"
             className="biode-header__mobile-menu-item"
             onClick={closeMobileMenu}
           >
             <span className="biode-header__dash">- </span>
             STORE
-          </Link>
+          </a>
 
           {/* 고객센터 */}
           <Link
