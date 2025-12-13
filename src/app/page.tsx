@@ -1,51 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
 import Link from "next/link";
-import { bannerNews } from "@/types/bannerNews";
-
 import { OrganizationStructuredData } from "@/components/StructuredData";
-
-// Google Maps API 타입 선언
-declare global {
-  interface Window {
-    google: {
-      maps: {
-        Map: new (
-          element: HTMLElement,
-          options: {
-            center: { lat: number; lng: number };
-            zoom: number;
-            styles?: Array<{
-              featureType?: string;
-              elementType?: string;
-              stylers: Array<{ [key: string]: string | number | boolean }>;
-            }>;
-          }
-        ) => {
-          setZoom: (zoom: number) => void;
-          setCenter: (center: { lat: number; lng: number }) => void;
-        };
-        Marker: new (options: {
-          position: { lat: number; lng: number };
-          map: {
-            setZoom: (zoom: number) => void;
-            setCenter: (center: { lat: number; lng: number }) => void;
-          };
-          title: string;
-        }) => {
-          setMap: (
-            map: {
-              setZoom: (zoom: number) => void;
-              setCenter: (center: { lat: number; lng: number }) => void;
-            } | null
-          ) => void;
-        };
-      };
-    };
-  }
-}
 
 // CSS 애니메이션을 위한 스타일
 const animationStyles = `
@@ -65,57 +22,26 @@ const animationStyles = `
   }
 `;
 
-interface Video {
-  id: number;
-  title: string;
-  description: string;
-  videoUrl: string;
-  thumbnailUrl: string;
-  isActive: boolean;
-  sortOrder: number;
-  createdAt: string;
-  updatedAt: string;
-}
-
 interface Banner {
   id: number;
   title: string;
   description?: string;
-  fileName: string;
-  filePath: string;
   imageUrl: string;
-  isActive: boolean;
-  createdAt: string;
-  updatedAt: string;
 }
 
-interface Greeting {
-  id: number;
-  title: string;
-  content: string;
-  isActive: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
-
-interface OrganizationChart {
-  id: number;
-  fileName: string;
-  filePath: string;
-  imageUrl: string;
-  isActive: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
-
-interface History {
-  id: number;
-  year: string;
-  description: string;
-  sortOrder: number;
-  isActive: boolean;
-  createdAt: string;
-}
+// 정적 배너 데이터
+const staticBanners: Banner[] = [
+  {
+    id: 1,
+    title: "banner1",
+    imageUrl: "/banner-news/1762569966294_qm99lc4dz2m.png",
+  },
+  {
+    id: 2,
+    title: "banner2",
+    imageUrl: "/banner-news/1762569988785_hmhad09c2sm.png",
+  },
+];
 
 export default function BIODEHomePage() {
   const firstSliderImageRef = useRef<HTMLImageElement | null>(null);
@@ -123,43 +49,9 @@ export default function BIODEHomePage() {
   const sliderSectionRef = useRef<HTMLElement | null>(null);
   const lastScrollYRef = useRef<number>(0);
   const [sliderSnapDone, setSliderSnapDone] = useState<boolean>(false);
-  const [video, setVideo] = useState<Video | null>(null);
-  const [banners, setBanners] = useState<Banner[]>([]);
+  const [banners] = useState<Banner[]>(staticBanners);
   const [currentBannerIndex, setCurrentBannerIndex] = useState<number>(0);
   const [currentVerticalSlideIndex, setCurrentVerticalSlideIndex] = useState<number>(0);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [greeting, setGreeting] = useState<Greeting | null>(null);
-  const [bannerNews, setBannerNews] = useState<bannerNews[] | null>(null);
-  const [organizationChart, setOrganizationChart] =
-    useState<OrganizationChart | null>(null);
-  const [histories, setHistories] = useState<History[]>([]);
-
-  // YouTube URL에서 비디오 ID 추출 함수
-  const extractVideoId = (videoUrl: string): string | null => {
-    try {
-      // iframe 코드에서 src 추출
-      const srcMatch = videoUrl.match(/src="([^"]+)"/);
-      if (srcMatch) {
-        const src = srcMatch[1];
-        // YouTube URL에서 비디오 ID 추출
-        const videoIdMatch = src.match(
-          /(?:youtube\.com\/embed\/|youtu\.be\/|youtube\.com\/watch\?v=)([^&\n?#]+)/
-        );
-        return videoIdMatch ? videoIdMatch[1] : null;
-      }
-      return null;
-    } catch (error) {
-      console.error("비디오 ID 추출 실패:", error);
-      return null;
-    }
-  };
-
-  // YouTube 직접 링크 생성 함수
-  const getYouTubeDirectLink = (videoUrl: string): string => {
-    const videoId = extractVideoId(videoUrl);
-    return videoId ? `https://www.youtube.com/watch?v=${videoId}` : "#";
-  };
 
   useEffect(() => {
     // CSS 스타일 주입
@@ -172,28 +64,24 @@ export default function BIODEHomePage() {
     };
   }, []);
 
-  // 세로 슬라이더: 자동 슬라이드 (6초마다) - 패턴: 0->1->2->1->0...
+  // 세로 슬라이더: 자동 슬라이드 (6초마다)
   useEffect(() => {
-    const pattern = [0, 1, 2, 1]; // 반복 패턴
+    const pattern = [0, 1, 2, 1];
     let patternIndex = 0;
 
     const autoSlideInterval = setInterval(() => {
       patternIndex = (patternIndex + 1) % pattern.length;
       const next = pattern[patternIndex];
-      console.log('슬라이드 인덱스 변경:', currentVerticalSlideIndex, '->', next);
       setCurrentVerticalSlideIndex(next);
     }, 6000);
 
-    console.log('자동 슬라이드 시작');
     return () => {
       clearInterval(autoSlideInterval);
-      console.log('자동 슬라이드 종료');
     };
   }, []);
 
   // 세로 슬라이더: 데스크톱에서 마지막 슬라이드 후 외부 스크롤 연결
   useEffect(() => {
-    // 데스크톱에서만 작동
     const isDesktop = () => window.innerWidth >= 1024;
     if (!isDesktop()) return;
 
@@ -204,7 +92,7 @@ export default function BIODEHomePage() {
     let lastScrollTime = 0;
 
     const handleWheel = (e: WheelEvent) => {
-      if (!isDesktop()) return; // 데스크톱 체크
+      if (!isDesktop()) return;
 
       const scrollTop = viewport.scrollTop;
       const scrollHeight = viewport.scrollHeight;
@@ -213,16 +101,12 @@ export default function BIODEHomePage() {
       const isAtBottom = scrollTop + clientHeight >= scrollHeight - 10;
       const now = Date.now();
 
-      // 위로 스크롤 중이고 맨 위에 있을 때
       if (e.deltaY < 0 && isAtTop && !isScrollingInSlider) {
-        // 슬라이더 밖으로 스크롤 허용 (위로)
         return;
       }
 
-      // 아래로 스크롤 중이고 맨 아래에 있을 때
       if (e.deltaY > 0 && isAtBottom) {
         if (now - lastScrollTime > 100) {
-          // 다음 섹션으로 이동
           e.preventDefault();
           const nextSection = sliderSectionRef.current?.nextElementSibling as HTMLElement;
           if (nextSection) {
@@ -234,7 +118,6 @@ export default function BIODEHomePage() {
         return;
       }
 
-      // 슬라이더 내부에서 스크롤 중
       if (!isAtTop && !isAtBottom) {
         isScrollingInSlider = true;
       }
@@ -267,8 +150,7 @@ export default function BIODEHomePage() {
     return () => window.removeEventListener("resize", computeHeight);
   }, []);
 
-  // 외부 스크롤이 내려오다 슬라이더를 만나면 섹션 상단에 스냅(지나치지 않도록)
-  // 데스크톱과 모바일 모두 작동
+  // 외부 스크롤이 내려오다 슬라이더를 만나면 섹션 상단에 스냅
   useEffect(() => {
     const section = sliderSectionRef.current;
     if (!section) return;
@@ -283,7 +165,6 @@ export default function BIODEHomePage() {
         const goingDown = (window.scrollY || window.pageYOffset) >= lastScrollYRef.current;
         lastScrollYRef.current = window.scrollY || window.pageYOffset;
         if (!sliderSnapDone && goingDown && entry.isIntersecting) {
-          // 뷰포트에 일정 부분 들어오면 섹션 시작으로 스냅
           section.scrollIntoView({ behavior: "smooth", block: "start" });
           setSliderSnapDone(true);
         }
@@ -313,330 +194,6 @@ export default function BIODEHomePage() {
     setCurrentBannerIndex(index % banners.length);
   };
 
-  // Google Maps API 로드 및 지도 초기화
-  useEffect(() => {
-    console.log("Google Maps API 초기화 시작");
-
-    const apiKey =
-      process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ||
-      "AIzaSyCJFR836cPFQxyZUE8bl375Cmkr3vBfAJ8";
-
-    console.log("API 키 확인:", apiKey ? "설정됨" : "설정되지 않음");
-
-    // API 키가 없으면 지도를 표시하지 않음
-    if (!apiKey) {
-      console.log("Google Maps API 키가 설정되지 않았습니다.");
-      return;
-    }
-
-    // 지도 초기화 함수
-    const initializeMap = () => {
-      console.log("지도 초기화 함수 실행");
-      const mapElement = document.getElementById("map");
-      console.log("지도 엘리먼트:", mapElement);
-
-      if (!mapElement) {
-        console.log("map 엘리먼트를 찾을 수 없습니다. 2초 후 재시도...");
-        setTimeout(initializeMap, 2000);
-        return;
-      }
-
-      // 이미 스크립트가 있으면 추가하지 않음
-      if (document.getElementById("google-maps-script")) {
-        console.log("Google Maps 스크립트가 이미 로드되어 있습니다.");
-        if (window.google && window.google.maps) {
-          console.log("Google Maps 객체가 이미 존재합니다. 지도 생성 중...");
-          createMap(mapElement);
-        }
-        return;
-      }
-
-      console.log("Google Maps 스크립트 로드 시작");
-      const script: HTMLScriptElement = document.createElement("script");
-      script.id = "google-maps-script";
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`;
-      script.async = true;
-      script.defer = true;
-      script.onload = () => {
-        console.log("Google Maps 스크립트 로드 완료");
-        setTimeout(() => createMap(mapElement), 100);
-      };
-      script.onerror = () => {
-        console.error("Google Maps API 로드 실패");
-        showMapPlaceholder(mapElement);
-      };
-      document.head.appendChild(script);
-    };
-
-    function createMap(mapElement: HTMLElement) {
-      console.log("지도 생성 함수 실행");
-      console.log("Google Maps 객체:", window.google?.maps);
-
-      if (window.google && window.google.maps && mapElement) {
-        console.log("지도 생성 조건 충족, 지도 생성 중...");
-        const center = { lat: 37.5665, lng: 126.978 }; // 서울 시청 좌표
-        const map = new window.google.maps.Map(mapElement, {
-          center,
-          zoom: 15,
-          styles: [
-            {
-              featureType: "poi",
-              elementType: "labels",
-              stylers: [{ visibility: "off" }],
-            },
-          ],
-        });
-        new window.google.maps.Marker({
-          position: center,
-          map: map,
-          title: "BIODE",
-        });
-        console.log("지도 생성 완료");
-
-        // 플레이스홀더 제거
-        const placeholder = mapElement.querySelector(
-          ".biode-map__placeholder"
-        );
-        if (placeholder) {
-          placeholder.remove();
-        }
-
-        // Force map to recalculate its size and center
-        setTimeout(() => {
-          const googleMaps = window.google?.maps as {
-            event?: {
-              trigger: (
-                map: {
-                  setZoom: (zoom: number) => void;
-                  setCenter: (center: { lat: number; lng: number }) => void;
-                },
-                event: string
-              ) => void;
-            };
-          };
-          if (googleMaps?.event) {
-            googleMaps.event.trigger(map, "resize");
-            map.setCenter(center);
-          }
-        }, 100);
-
-        // Additional resize trigger after a longer delay
-        setTimeout(() => {
-          const googleMaps = window.google?.maps as {
-            event?: {
-              trigger: (
-                map: {
-                  setZoom: (zoom: number) => void;
-                  setCenter: (center: { lat: number; lng: number }) => void;
-                },
-                event: string
-              ) => void;
-            };
-          };
-          if (googleMaps?.event) {
-            googleMaps.event.trigger(map, "resize");
-            map.setCenter(center);
-          }
-        }, 500);
-      } else {
-        console.error("지도 생성 실패:", {
-          google: !!window.google,
-          maps: !!window.google?.maps,
-          mapElement: !!mapElement,
-        });
-        // 재시도
-        setTimeout(() => createMap(mapElement), 500);
-      }
-    }
-
-    function showMapPlaceholder(mapElement: HTMLElement) {
-      console.log("지도 플레이스홀더 표시");
-      if (mapElement) {
-        mapElement.innerHTML = `
-          <div class="flex items-center justify-center h-full bg-gray-200 rounded-lg">
-            <div class="text-center text-gray-600">
-              <svg class="w-16 h-16 mx-auto mb-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
-              </svg>
-              <p class="text-lg font-medium">지도 로드 중...</p>
-              <p class="text-sm">Google Maps API 키가 필요합니다</p>
-            </div>
-          </div>
-        `;
-      }
-    }
-
-    // 컴포넌트가 마운트된 후 지도 초기화 시작
-    setTimeout(initializeMap, 2000);
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      setError(null);
-
-      try {
-        // 배너 데이터 가져오기
-        try {
-          const bannerResponse = await fetch("/api/banners?action=active");
-          if (bannerResponse.ok) {
-            const bannerData = await bannerResponse.json();
-            console.log("배너 데이터(action=active):", bannerData);
-            let list: Banner[] = [];
-            if (Array.isArray(bannerData)) {
-              list = bannerData as Banner[];
-            } else if (bannerData && Array.isArray(bannerData.content)) {
-              list = bannerData.content as Banner[];
-            }
-
-            if (list.length === 0) {
-              // fallback: 전체 조회 시그니처 지원
-              const fallback = await fetch("/api/banners");
-              if (fallback.ok) {
-                const fb = await fallback.json();
-                console.log("배너 데이터(fallback):", fb);
-                const fbList = Array.isArray(fb)
-                  ? (fb as Banner[])
-                  : Array.isArray(fb?.content)
-                  ? (fb.content as Banner[])
-                  : [];
-                list = fbList.filter((b) => !!b.imageUrl && b.isActive !== false);
-              }
-            }
-
-            const validBanners = list.filter((b) => !!b.imageUrl);
-            setBanners(validBanners);
-            setCurrentBannerIndex(0);
-          }
-        } catch (bannerError) {
-          console.log("배너 데이터를 불러올 수 없습니다:", bannerError);
-          setBanners([]);
-        }
-
-        // 비디오 데이터 가져오기
-        try {
-          const videoResponse = await fetch("/api/videos?action=active");
-          if (videoResponse.ok) {
-            const videoData = await videoResponse.json();
-            console.log("비디오 데이터:", videoData);
-            // 배열의 첫 번째 항목 사용
-            if (videoData && Array.isArray(videoData) && videoData.length > 0) {
-              const firstVideo = videoData[0];
-              console.log("첫 번째 비디오:", firstVideo);
-              console.log("비디오 활성 상태:", firstVideo.isActive);
-              console.log("비디오 YouTube URL:", firstVideo.videoUrl);
-              // 활성 상태인 비디오만 설정
-              if (firstVideo.isActive) {
-                setVideo(firstVideo);
-                console.log("비디오 상태 설정 완료");
-              } else {
-                console.log("활성 상태인 비디오가 없습니다.");
-              }
-            } else {
-              console.log("비디오 데이터가 비어있습니다.");
-            }
-          }
-        } catch (videoError) {
-          console.log("비디오 데이터를 불러올 수 없습니다:", videoError);
-        }
-
-        // 인사말 데이터 가져오기
-        try {
-          const greetingResponse = await fetch("/api/greetings?action=active");
-          if (greetingResponse.ok) {
-            const greetingData = await greetingResponse.json();
-            console.log("인사말 데이터:", greetingData);
-            // 배열의 첫 번째 항목 사용
-            if (
-              greetingData &&
-              Array.isArray(greetingData) &&
-              greetingData.length > 0
-            ) {
-              setGreeting(greetingData[0]);
-            }
-          }
-        } catch (greetingError) {
-          console.log("인사말 데이터를 불러올 수 없습니다:", greetingError);
-        }
-
-        // 배너뉴스 데이터 가져오기
-        try {
-          const bannerNewsResponse = await fetch(
-            "/api/banner-news?action=active"
-          );
-          if (bannerNewsResponse.ok) {
-            const bannerNewsData = await bannerNewsResponse.json();
-            console.log("배너뉴스 데이터:", bannerNewsData);
-            setBannerNews(bannerNewsData || []);
-          }
-        } catch (bannerNewsError) {
-          console.log("배너뉴스 데이터를 불러올 수 없습니다:", bannerNewsError);
-          setBannerNews([]);
-        }
-
-        // 조직도 데이터 가져오기
-        try {
-          const organizationResponse = await fetch(
-            "/api/organization?action=active"
-          );
-          if (organizationResponse.ok) {
-            const organizationData = await organizationResponse.json();
-            console.log("조직도 데이터:", organizationData);
-            // 조직도 데이터는 단일 객체로 반환됨
-            if (organizationData && organizationData.isActive) {
-              setOrganizationChart(organizationData);
-            }
-          }
-        } catch (organizationError) {
-          console.log("조직도 데이터를 불러올 수 없습니다:", organizationError);
-        }
-
-        // 히스토리 데이터 가져오기
-        try {
-          const historyResponse = await fetch("/api/history?action=active");
-          if (historyResponse.ok) {
-            const historyData = await historyResponse.json();
-            console.log("히스토리 데이터:", historyData);
-            // 히스토리 데이터는 {data: Array} 형태로 반환됨
-            if (
-              historyData &&
-              historyData.data &&
-              Array.isArray(historyData.data)
-            ) {
-              setHistories(historyData.data);
-            }
-          }
-        } catch (historyError) {
-          console.log("히스토리 데이터를 불러올 수 없습니다:", historyError);
-          setHistories([]);
-        }
-      } catch (error) {
-        console.error("데이터를 불러오는데 실패했습니다:", error);
-        setError("데이터를 불러오는데 실패했습니다.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-xl text-gray-600">데이터를 불러오는 중...</div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-xl text-red-600">{error}</div>
-      </div>
-    );
-  }
-
   return (
     <div className="biode-home" style={{ backgroundColor: '#ffffff' }}>
       <OrganizationStructuredData
@@ -660,7 +217,7 @@ export default function BIODEHomePage() {
         }}
       />
 
-      {/* 배너 섹션 - 슬라이드 효과와 함께 */}
+      {/* 배너 섹션 */}
       {banners.length > 0 && (
         <section className="biode-banner-full biode-banner-full--flush">
           <div className="biode-banner-slider">
@@ -694,7 +251,7 @@ export default function BIODEHomePage() {
               ))}
             </div>
 
-            {/* 배너 내 컨트롤 */}
+            {/* 배너 컨트롤 */}
             {banners.length > 1 && (
               <div className="biode-banner-controls">
                 <div className="biode-banner-dots" role="tablist" aria-label="배너 선택">
@@ -734,7 +291,7 @@ export default function BIODEHomePage() {
         />
       </section>
 
-      {/* 새 섹션: 한 번에 이미지 하나, 세로 슬라이드로 자동 전환 */}
+      {/* 세로 슬라이더 섹션 */}
       <section ref={sliderSectionRef} className="biode-vertical-slider" aria-label="BIODE 제품 미리보기">
         <div className="biode-vertical-slider__wrapper" style={verticalSliderHeightPx ? { height: `${verticalSliderHeightPx}px` } : undefined}>
           <div
@@ -772,8 +329,6 @@ export default function BIODEHomePage() {
                   src="/slide2.png"
                   alt="BIODE 미리보기 2"
                   className="biode-vertical-slider__img"
-                  onLoad={() => console.log('slide2.png 로드 성공')}
-                  onError={(e) => console.error('slide2.png 로드 실패:', e)}
                 />
               </Link>
             </div>
@@ -785,24 +340,23 @@ export default function BIODEHomePage() {
                   src="/slide3.png"
                   alt="BIODE 미리보기 3"
                   className="biode-vertical-slider__img"
-                  onLoad={() => console.log('slide3.png 로드 성공')}
-                  onError={(e) => console.error('slide3.png 로드 실패:', e)}
                 />
               </Link>
             </div>
-
           </div>
         </div>
       </section>
 
-        {/* 비오드가 처음이시라구요 */}
-        <section className="biode-first-time" style={{marginBottom: 0, paddingBottom: 0, minHeight: '36vh'}}>
-          <div className="biode-first-time__container" style={{minHeight: '29vh'}}>
-            <div className="biode-first-time__image-wrapper" style={{marginTop: 0}}>
-              <Link href="/experience"><img src="/first.png" alt="비오드 소개" className="biode-first-time__image" /></Link>
-            </div>
+      {/* 비오드가 처음이시라구요 */}
+      <section className="biode-first-time" style={{marginBottom: 0, paddingBottom: 0, minHeight: '36vh'}}>
+        <div className="biode-first-time__container" style={{minHeight: '29vh'}}>
+          <div className="biode-first-time__image-wrapper" style={{marginTop: 0}}>
+            <Link href="/experience">
+              <img src="/first.png" alt="비오드 소개" className="biode-first-time__image" />
+            </Link>
           </div>
-        </section>
+        </div>
+      </section>
     </div>
   );
 }
