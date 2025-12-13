@@ -3,8 +3,6 @@ import { Geist } from "next/font/google";
 import localFont from "next/font/local";
 import "@/styles/globals.scss";
 import ConditionalLayout from "@/components/ConditionalLayout";
-import GoogleAnalytics from "@/components/GoogleAnalytics";
-import VisitorLogger from "@/components/VisitorLogger";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -132,10 +130,6 @@ export default function RootLayout({
     <html lang="ko">
       <body className={`${geist.variable} ${nanumSquare.variable} biode-layout`}>
         <ConditionalLayout>{children}</ConditionalLayout>
-
-        {/* 방문자 로그 자동 기록 */}
-        <VisitorLogger />
-
       </body>
     </html>
   );

@@ -1,132 +1,80 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
-import { InquiryService } from "@/services/inquiryService";
-import {
-  validatePaginationParams,
-  getPaginationOffset,
-  createPaginationResult,
-} from "@/utils/pagination";
+import { Resend } from "resend";
 
-export async function GET(request: NextRequest) {
-  try {
-    const { searchParams } = new URL(request.url);
-
-    // 1. 쿼리 파라미터 파싱
-    const page = parseInt(searchParams.get("page") || "1");
-    const limit = parseInt(searchParams.get("limit") || "10");
-    const isAnswered = searchParams.get("isAnswered");
-    const isSecret = searchParams.get("isSecret");
-
-    // 2. 유효성 검사
-    if (!validatePaginationParams(page, limit)) {
-      return NextResponse.json(
-        { error: "잘못된 페이지네이션 파라미터입니다." },
-        { status: 400 }
-      );
-    }
-
-    // 3. 필터 조건 구성
-    const where: {
-      isAnswered?: boolean;
-      isSecret?: boolean;
-    } = {};
-    if (isAnswered !== null) {
-      where.isAnswered = isAnswered === "true";
-    }
-    if (isSecret !== null) {
-      where.isSecret = isSecret === "true";
-    }
-
-    // 4. 데이터 조회
-    const offset = getPaginationOffset(page, limit);
-
-    const [inquiries, total] = await Promise.all([
-      prisma.inquiry.findMany({
-        where,
-        orderBy: { createdAt: "desc" },
-        skip: offset,
-        take: limit,
-        select: {
-          id: true,
-          title: true,
-          author: true,
-          isSecret: true,
-          isAnswered: true,
-          createdAt: true,
-          updatedAt: true,
-        },
-      }),
-      prisma.inquiry.count({ where }),
-    ]);
-
-    // 5. 응답
-    const result = createPaginationResult(inquiries, page, limit, total);
-
-    return NextResponse.json({
-      success: true,
-      ...result,
-    });
-  } catch (error) {
-    console.error("문의글 목록 조회 오류:", error);
-    return NextResponse.json(
-      { error: "문의글 목록 조회 중 오류가 발생했습니다." },
-      { status: 500 }
-    );
-  }
-}
+// 관리자 이메일 (환경변수로 설정 가능)
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "mccoys1361@gmail.com";
 
 export async function POST(request: NextRequest) {
   try {
+    // API 키 확인
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      console.error("RESEND_API_KEY가 설정되지 않았습니다.");
+      return NextResponse.json(
+        { error: "이메일 서비스가 설정되지 않았습니다." },
+        { status: 500 }
+      );
+    }
+
+    const resend = new Resend(apiKey);
+
     const body = await request.json();
-    const { title, content, author, email, isSecret, password } = body;
+    const { title, content, author, email } = body;
 
     // 1. 입력 검증
-    if (!title || !content || !author) {
+    if (!content || !author) {
       return NextResponse.json(
-        { error: "제목, 내용, 작성자는 필수입니다." },
+        { error: "내용과 작성자는 필수입니다." },
         { status: 400 }
       );
     }
 
-    // 2. 비밀글 검증
-    if (isSecret && !password) {
+    // 2. 이메일 발송
+    const { error } = await resend.emails.send({
+      from: "BIODE 문의 <onboarding@resend.dev>", // Resend 무료 플랜은 이 주소만 사용 가능
+      to: ADMIN_EMAIL,
+      subject: title || `[BIODE] ${author}님의 문의`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #333; border-bottom: 2px solid #4F46E5; padding-bottom: 10px;">
+            새로운 문의가 접수되었습니다
+          </h2>
+
+          <div style="background: #f9fafb; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <p style="margin: 10px 0;"><strong>이름:</strong> ${author}</p>
+            <p style="margin: 10px 0;"><strong>이메일:</strong> ${email || "미입력"}</p>
+          </div>
+
+          <div style="padding: 20px; background: #fff; border: 1px solid #e5e7eb; border-radius: 8px;">
+            <h3 style="color: #374151; margin-top: 0;">문의 내용</h3>
+            <p style="white-space: pre-wrap; color: #4b5563; line-height: 1.6;">${content}</p>
+          </div>
+
+          <p style="color: #9ca3af; font-size: 12px; margin-top: 20px;">
+            이 이메일은 BIODE 웹사이트에서 자동 발송되었습니다.
+          </p>
+        </div>
+      `,
+      replyTo: email || undefined,
+    });
+
+    if (error) {
+      console.error("이메일 발송 오류:", error);
       return NextResponse.json(
-        { error: "비밀글은 비밀번호가 필요합니다." },
-        { status: 400 }
+        { error: "문의 접수 중 오류가 발생했습니다." },
+        { status: 500 }
       );
     }
 
-    // 3. Service 호출
-    const service = new InquiryService();
-    let inquiry;
-
-    if (isSecret) {
-      inquiry = await service.createSecretInquiry({
-        title,
-        content,
-        author,
-        email,
-        password,
-      });
-    } else {
-      inquiry = await service.createPublicInquiry({
-        title,
-        content,
-        author,
-        email,
-      });
-    }
-
-    // 4. 응답
+    // 3. 성공 응답
     return NextResponse.json({
       success: true,
-      data: service.toResponse(inquiry),
-      message: "문의글이 성공적으로 등록되었습니다.",
+      message: "문의가 성공적으로 접수되었습니다.",
     });
   } catch (error) {
-    console.error("문의글 생성 오류:", error);
+    console.error("문의 처리 오류:", error);
     return NextResponse.json(
-      { error: "문의글 생성 중 오류가 발생했습니다." },
+      { error: "문의 접수 중 오류가 발생했습니다." },
       { status: 500 }
     );
   }
