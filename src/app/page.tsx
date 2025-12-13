@@ -638,7 +638,7 @@ export default function BIODEHomePage() {
   }
 
   return (
-    <div className="biode-home">
+    <div className="biode-home" style={{ backgroundColor: '#ffffff' }}>
       <OrganizationStructuredData
         data={{
           name: "BIODE",
@@ -746,43 +746,49 @@ export default function BIODEHomePage() {
           >
             {/* 슬라이드 1 */}
             <div className="biode-vertical-slider__slide" aria-label="미리보기 이미지 1">
-              <img
-                ref={firstSliderImageRef}
-                src="/slide1.png"
-                alt="BIODE 미리보기 1"
-                className="biode-vertical-slider__img"
-                onLoad={() => {
-                  const img = firstSliderImageRef.current;
-                  if (!img) return;
-                  if (img.naturalWidth > 0 && img.naturalHeight > 0) {
-                    const vw = window.innerWidth;
-                    const h = Math.round((vw * img.naturalHeight) / img.naturalWidth);
-                    setVerticalSliderHeightPx(h);
-                  }
-                }}
-              />
+              <Link href="/wow/principle">
+                <img
+                  ref={firstSliderImageRef}
+                  src="/slide1.png"
+                  alt="BIODE 미리보기 1"
+                  className="biode-vertical-slider__img"
+                  onLoad={() => {
+                    const img = firstSliderImageRef.current;
+                    if (!img) return;
+                    if (img.naturalWidth > 0 && img.naturalHeight > 0) {
+                      const vw = window.innerWidth;
+                      const h = Math.round((vw * img.naturalHeight) / img.naturalWidth);
+                      setVerticalSliderHeightPx(h);
+                    }
+                  }}
+                />
+              </Link>
             </div>
 
             {/* 슬라이드 2 */}
             <div className="biode-vertical-slider__slide" aria-label="미리보기 이미지 2">
-              <img
-                src="/slide2.png"
-                alt="BIODE 미리보기 2"
-                className="biode-vertical-slider__img"
-                onLoad={() => console.log('slide2.png 로드 성공')}
-                onError={(e) => console.error('slide2.png 로드 실패:', e)}
-              />
+              <Link href="/wow/technology">
+                <img
+                  src="/slide2.png"
+                  alt="BIODE 미리보기 2"
+                  className="biode-vertical-slider__img"
+                  onLoad={() => console.log('slide2.png 로드 성공')}
+                  onError={(e) => console.error('slide2.png 로드 실패:', e)}
+                />
+              </Link>
             </div>
 
             {/* 슬라이드 3 */}
             <div className="biode-vertical-slider__slide" aria-label="미리보기 이미지 3">
-              <img
-                src="/slide3.png"
-                alt="BIODE 미리보기 3"
-                className="biode-vertical-slider__img"
-                onLoad={() => console.log('slide3.png 로드 성공')}
-                onError={(e) => console.error('slide3.png 로드 실패:', e)}
-              />
+              <Link href="/wow/effect">
+                <img
+                  src="/slide3.png"
+                  alt="BIODE 미리보기 3"
+                  className="biode-vertical-slider__img"
+                  onLoad={() => console.log('slide3.png 로드 성공')}
+                  onError={(e) => console.error('slide3.png 로드 실패:', e)}
+                />
+              </Link>
             </div>
 
           </div>
@@ -793,7 +799,7 @@ export default function BIODEHomePage() {
         <section className="biode-first-time" style={{marginBottom: 0, paddingBottom: 0, minHeight: '36vh'}}>
           <div className="biode-first-time__container" style={{minHeight: '29vh'}}>
             <div className="biode-first-time__image-wrapper" style={{marginTop: 0}}>
-              <img src="/first.png" alt="비오드 소개" className="biode-first-time__image" />
+              <Link href="/experience"><img src="/first.png" alt="비오드 소개" className="biode-first-time__image" /></Link>
             </div>
           </div>
         </section>
