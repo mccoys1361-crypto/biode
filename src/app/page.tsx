@@ -41,6 +41,11 @@ const staticBanners: Banner[] = [
     title: "banner2",
     imageUrl: "/banner-news/1762569988785_hmhad09c2sm.png",
   },
+  {
+    id: 3,
+    title: "banner3",
+    imageUrl: "/banner3.png",
+  },
 ];
 
 export default function BIODEHomePage() {
