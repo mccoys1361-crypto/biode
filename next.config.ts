@@ -2,11 +2,6 @@ import type {NextConfig} from "next";
 import path from "path";
 
 const nextConfig: NextConfig = {
-  // deprecated된 옵션 제거
-  // experimental: {
-  //   serverComponentsExternalPackages: ['prisma']
-  // },
-
   // 새로운 옵션으로 변경
   serverExternalPackages: ["prisma"],
 
