@@ -117,7 +117,9 @@ export default function Header() {
 
               <Link href="/experience" className="biode-header__nav-area biode-header__nav-area--6" aria-label="놀라운 경험의 시작" />
               <a href="https://naver.me/Fwj2cpxc" target="_blank" rel="noopener noreferrer" className="biode-header__nav-area biode-header__nav-area--7" aria-label="STORE" />
+              {/* 고객센터 숨김 처리
               <Link href="/contact" className="biode-header__nav-area biode-header__nav-area--8" aria-label="고객센터" />
+              */}
             </div>
           </nav>
 
@@ -214,7 +216,7 @@ export default function Header() {
             STORE
           </a>
 
-          {/* 고객센터 */}
+          {/* 고객센터 숨김 처리
           <Link
             href="/contact"
             className="biode-header__mobile-menu-item"
@@ -223,6 +225,7 @@ export default function Header() {
             <span className="biode-header__dash">- </span>
             고객센터
           </Link>
+          */}
         </div>
 
         {/* PC 서브메뉴 - WOW 메뉴만 */}
