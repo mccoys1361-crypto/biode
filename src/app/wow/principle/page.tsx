@@ -40,32 +40,12 @@ export default function WowPrinciplePage() {
       {isMobile && (
         <>
           {/* Biod Principle 섹션 */}
-          <section style={{ width: '100%', marginBottom: 0, paddingBottom: 0 }}>
-            <div style={{ padding: '2rem' }}>
-              <p style={{ fontSize: '1.3rem', fontWeight: 300, color: '#401F1D', lineHeight: 1.5 }}>
-              비오드의 시작은 식이 보조제를 기반으로 노화 과정을 늦추는
-              <br />기술을 연구하는 바이오 회사였습니다.
-            <br />사람의 건강수명에 대한 수많은 연구 자료를 축적하고 있었고
-            <br />자연스럽게 수명을 단축시키는 노화와 질병의 요인들에 대한
-            <br />저항력을 갖추는 다양한 솔루션들을 보유하고 있었답니다.
-            <br />그런데...
-
-            <br />어느 날 저희는 너무나 충격적인 현실과 마주하게 되었습니다.
-            <br />사람에 비해 너무나 뒤처진 기술과 증명되지 못한 임상결과들이
-            <br />반려동물 건강식 시장에 버젓이 그것도 아주 자연스럽게
-            <br />소비자들의 눈을 속이고 있는 상황이었습니다.
-            <br />요것 봐라...
-
-            <br />이미 부유한 아주 작은 기술만으로도 압도적으로 이길 수 있는
-            <br />현실이었지만 비오드는 한 번 더 생각했습니다. 개발되고 증명된
-            <br />최고의 솔루션에 반려동물에 최적화된 레시피까지 얹어
-            <br />그야말로,
-
-            <br />명실상부한 세계 최고의 반려동물 유산균 솔루션을 만들어 보자!
-            <br />이렇게 탄생한 유산균이
-              </p>
-              <p>바로, 비오드의 라이트핏 펫 유산균입니다!</p>
-            </div>
+          <section style={{ width: '100vw', position: 'relative', left: '50%', right: '50%', marginLeft: '-50vw', marginRight: '-50vw' }}>
+            <img
+              src="/principle1_m_2.png"
+              alt="비오드의 원칙"
+              style={{ width: '100%', height: 'auto', display: 'block' }}
+            />
           </section>
 
           {/* 모바일 섹션 2 이미지 */}

@@ -40,18 +40,11 @@ export default function OnlyPage() {
 
       {isMobile && (
         <section style={{ width: '100%', marginBottom: 0, paddingBottom: 0 }}>
-          <div style={{ padding: '2rem' }}>
-            <p style={{ fontSize: '1.3rem', fontWeight: 700, color: '#401F1D', lineHeight: 1.5 }}>우리는 얼마나 오랫동안 반려동물과 함께 할 수 있을까요?
-              <br />반려동물의 건강이 걱정될 때 우리는 본능적으로
-              <br />더 나은 기술을 찾아 여행을 떠나곤 합니다.
-              <br />그리고 다양한 경험을 얻습니다.
-              <br />그만큼 기술이 주는 위로 그리고 혜택은
-              <br />우리가 생각하는 것보다 아주 크고 놀랍습니다.
-              <br />그래서 우리는,
-              <br />당신과 반려동물에게 기술의 감동을
-              <br />고스란히 느낄 수 있는 효과적인 방법에 대해
-              <br />고민하고 연구합니다.</p>
-          </div>
+          <img
+            src="/only_m_2.png"
+            alt="Only 비오드"
+            style={{ width: '100%', height: 'auto', display: 'block' }}
+          />
         </section>
       )}
 
