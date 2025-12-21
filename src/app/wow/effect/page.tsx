@@ -25,28 +25,28 @@ export default function WowEffectPage() {
   return (
     <div>
       <section className="img-section">
-        <img src="/effect/effect_01.png" className="pcn" />
+        <img src="/effect/effect_01.png" style={{ width: '100%', height: 'auto', display: 'block' }} alt="비오드의 효과 1" />
       </section>
       <section className="img-section">
-        <img src="/effect/effect_02.png" className="pcn" />
+        <img src="/effect/effect_02.png" style={{ width: '100%', height: 'auto', display: 'block' }} alt="비오드의 효과 2" />
       </section>
       <section className="img-section">
-        <img src="/effect/effect_03.png" className="pcn" />
+        <img src="/effect/effect_03.png" style={{ width: '100%', height: 'auto', display: 'block' }} alt="비오드의 효과 3" />
       </section>
       <section className="img-section">
-        <img src="/effect/effect_04.png" className="pcn" />
+        <img src="/effect/effect_04.png" style={{ width: '100%', height: 'auto', display: 'block' }} alt="비오드의 효과 4" />
       </section>
       <section className="img-section">
-        <img src="/effect/effect_05.png" className="pcn" />
+        <img src="/effect/effect_05.png" style={{ width: '100%', height: 'auto', display: 'block' }} alt="비오드의 효과 5" />
       </section>
       <section className="img-section">
-        <img src="/effect/effect_06.png" className="pcn" />
+        <img src="/effect/effect_06.png" style={{ width: '100%', height: 'auto', display: 'block' }} alt="비오드의 효과 6" />
       </section>
       <section className="img-section">
-        <img src="/effect/effect_07.png" className="pcn" />
+        <img src="/effect/effect_07.png" style={{ width: '100%', height: 'auto', display: 'block' }} alt="비오드의 효과 7" />
       </section>
       <section className="img-section">
-        <img src="/effect/effect_08.png" className="pcn" />
+        <img src="/effect/effect_08.png" style={{ width: '100%', height: 'auto', display: 'block' }} alt="비오드의 효과 8" />
       </section>
     </div>
   );
