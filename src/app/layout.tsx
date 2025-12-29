@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://www.biode.co.kr"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://biode.co.kr"),
   alternates: {
     canonical: "/",
     languages: {
@@ -81,7 +81,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "ko_KR",
-    url: "https://www.biode.co.kr",
+    url: "https://biode.co.kr",
     title: "비오드(BIODE) - 세계 최고 수준의 반려동물 유산균",
     description:
       "과학적 데이터에 근거한 세계 최고 수준의 반려동물 유산균. 라이트핏 펫 유산균으로 반려동물의 건강한 삶을 지켜드립니다.",

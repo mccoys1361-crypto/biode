@@ -14,4 +14,4 @@ Allow: /wow/principle
 Disallow: /api/
 
 # 사이트맵 위치
-Sitemap: https://www.biode.co.kr/sitemap.xml
+Sitemap: https://biode.co.kr/sitemap.xml
