@@ -1,3 +1,25 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "비오드의 원칙 - 특별하고 유별난 판매정책",
+  description:
+    "비오드만의 특별한 원칙. 반려동물의 건강을 최우선으로 생각하는 유별난 판매정책과 품질 철학을 소개합니다.",
+  keywords: [
+    "비오드 원칙",
+    "반려동물 건강",
+    "판매정책",
+    "품질 철학",
+    "펫 유산균 원칙",
+    "비오드 철학",
+  ],
+  openGraph: {
+    title: "비오드의 원칙 - 특별하고 유별난 판매정책",
+    description:
+      "비오드만의 특별한 원칙. 반려동물의 건강을 최우선으로 생각하는 유별난 판매정책과 품질 철학.",
+    url: "https://biode.co.kr/wow/principle",
+  },
+};
+
 export default function WowPrinciplePage() {
   return (
     <div style={{ backgroundColor: '#ffffff' }}>

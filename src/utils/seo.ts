@@ -26,8 +26,8 @@ export function generateMetadata(config: SEOConfig): Metadata {
   } = config;
 
   const fullUrl = url
-    ? `https://www.biode.com${url}`
-    : "https://www.biode.com";
+    ? `https://biode.co.kr${url}`
+    : "https://biode.co.kr";
 
   return {
     title: {
@@ -44,7 +44,7 @@ export function generateMetadata(config: SEOConfig): Metadata {
       address: false,
       telephone: false,
     },
-    metadataBase: new URL("https://www.biode.com"),
+    metadataBase: new URL("https://biode.co.kr"),
     alternates: {
       canonical: url || "/",
     },
@@ -119,8 +119,8 @@ export function generateBIODEMetadata(config: SEOConfig): Metadata {
   } = config;
 
   const fullUrl = url
-    ? `https://www.biode.com${url}`
-    : "https://www.biode.com";
+    ? `https://biode.co.kr${url}`
+    : "https://biode.co.kr";
 
   return {
     title: {
@@ -137,7 +137,7 @@ export function generateBIODEMetadata(config: SEOConfig): Metadata {
       address: false,
       telephone: false,
     },
-    metadataBase: new URL("https://www.biode.com"),
+    metadataBase: new URL("https://biode.co.kr"),
     alternates: {
       canonical: url || "/",
     },

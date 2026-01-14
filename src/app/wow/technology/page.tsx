@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     title: "비오드의 기술 - 건강수명을 늘리는 놀라운 기술",
     description:
       "엄마의 눈으로 하나하나 따진 비오드의 기술. 성분 하나, 원료 하나까지 꼼꼼하게 챙긴 진짜 유산균.",
-    url: "https://www.biode.com/wow/technology",
+    url: "https://biode.co.kr/wow/technology",
   },
 };
 

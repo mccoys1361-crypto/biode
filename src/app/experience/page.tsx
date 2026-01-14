@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     title: "놀라운 경험의 시작 - 비오드와 함께하는 건강한 변화",
     description:
       "반려동물과 함께하는 놀라운 경험의 시작. 비오드 라이트핏 펫 유산균으로 시작하는 건강한 변화.",
-    url: "https://www.biode.com/experience",
+    url: "https://biode.co.kr/experience",
   },
 };
 
