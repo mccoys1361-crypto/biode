@@ -157,11 +157,7 @@ export const STRUCTURED_DATA_CONFIG = {
         email: "info@biode.co.kr",
         availableLanguage: "Korean",
       },
-      sameAs: [
-        "https://www.facebook.com/biode",
-        "https://www.instagram.com/biode",
-        "https://www.linkedin.com/company/biode",
-      ],
+      sameAs: [],
       foundingDate: "2020",
       industry: "반려동물 건강식품",
       keywords: "비오드, BIODE, 반려동물 유산균, 펫 유산균, 라이트핏",

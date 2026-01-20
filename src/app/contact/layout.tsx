@@ -16,6 +16,14 @@ export const metadata: Metadata = {
     description:
       "비오드에 문의하세요. 반려동물 유산균에 관한 궁금한 점이나 제품 문의를 친절하게 안내해 드립니다.",
     url: "https://biode.co.kr/contact",
+    images: [
+      {
+        url: "/biode-og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "비오드 반려동물 유산균",
+      },
+    ],
   },
 };
 

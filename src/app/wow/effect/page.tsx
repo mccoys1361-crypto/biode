@@ -18,6 +18,14 @@ export const metadata: Metadata = {
     description:
       "비오드 라이트핏 펫 유산균의 입증된 효과. 과학적 데이터와 실험을 통해 증명된 결과만을 믿습니다.",
     url: "https://biode.co.kr/wow/effect",
+    images: [
+      {
+        url: "/biode-og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "비오드 반려동물 유산균",
+      },
+    ],
   },
 };
 

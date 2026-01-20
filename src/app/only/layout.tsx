@@ -16,6 +16,14 @@ export const metadata: Metadata = {
     description:
       "비오드만의 특별함을 만나보세요. 더 오랫동안 건강한 모습의 반려동물과 함께할 수 있는 더 나은 유산균.",
     url: "https://biode.co.kr/only",
+    images: [
+      {
+        url: "/biode-og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "비오드 반려동물 유산균",
+      },
+    ],
   },
 };
 

@@ -17,6 +17,14 @@ export const metadata: Metadata = {
     description:
       "비오드만의 특별한 원칙. 반려동물의 건강을 최우선으로 생각하는 유별난 판매정책과 품질 철학.",
     url: "https://biode.co.kr/wow/principle",
+    images: [
+      {
+        url: "/biode-og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "비오드 반려동물 유산균",
+      },
+    ],
   },
 };
 

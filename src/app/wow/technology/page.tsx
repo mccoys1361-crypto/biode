@@ -18,6 +18,14 @@ export const metadata: Metadata = {
     description:
       "엄마의 눈으로 하나하나 따진 비오드의 기술. 성분 하나, 원료 하나까지 꼼꼼하게 챙긴 진짜 유산균.",
     url: "https://biode.co.kr/wow/technology",
+    images: [
+      {
+        url: "/biode-og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "비오드 반려동물 유산균",
+      },
+    ],
   },
 };
 

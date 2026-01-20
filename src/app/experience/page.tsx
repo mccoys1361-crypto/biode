@@ -17,6 +17,14 @@ export const metadata: Metadata = {
     description:
       "반려동물과 함께하는 놀라운 경험의 시작. 비오드 라이트핏 펫 유산균으로 시작하는 건강한 변화.",
     url: "https://biode.co.kr/experience",
+    images: [
+      {
+        url: "/biode-og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "비오드 반려동물 유산균",
+      },
+    ],
   },
 };
 
