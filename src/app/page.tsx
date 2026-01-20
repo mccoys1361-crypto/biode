@@ -203,11 +203,11 @@ export default function BIODEHomePage() {
     <div className="biode-home" style={{ backgroundColor: '#ffffff' }}>
       <OrganizationStructuredData
         data={{
-          name: "BIODE",
-          url: "https://www.biode.com",
+          name: "비오드(BIODE)",
+          url: "https://biode.co.kr",
           description:
             "비오드(BIODE)는 과학적 데이터에 근거한 세계 최고 수준의 반려동물 유산균 솔루션을 제공합니다. 라이트핏 펫 유산균으로 반려동물의 건강한 삶을 지켜드립니다.",
-          logo: "https://www.biode.com/logo.png",
+          logo: "https://biode.co.kr/logo.png",
           address: {
             streetAddress: "소하로 190 G타워 1217",
             addressLocality: "광명시",
