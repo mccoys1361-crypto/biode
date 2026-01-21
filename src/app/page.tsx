@@ -201,6 +201,28 @@ export default function BIODEHomePage() {
 
   return (
     <div className="biode-home" style={{ backgroundColor: '#ffffff' }}>
+      {/* SEO: 검색엔진용 숨겨진 콘텐츠 */}
+      <div className="sr-only">
+        <h1>비오드(BIODE) - 세계 최고 수준의 반려동물 유산균</h1>
+        <p>
+          비오드(BIODE)는 과학적 데이터에 근거한 세계 최고 수준의 반려동물 유산균 솔루션을 제공합니다.
+          라이트핏 펫 유산균으로 강아지, 고양이 등 반려동물의 장 건강과 면역력 강화를 도와드립니다.
+        </p>
+        <h2>반려동물 유산균 전문 기업</h2>
+        <p>
+          비오드는 펫 프로바이오틱스 분야의 선두주자로서, 반려견과 반려묘를 위한
+          프리미엄 유산균 제품을 연구 개발하고 있습니다. 과학적으로 검증된 균주와
+          특허 기술을 바탕으로 반려동물의 건강한 삶을 지원합니다.
+        </p>
+        <h2>주요 제품 및 서비스</h2>
+        <ul>
+          <li>라이트핏 펫 유산균 - 반려동물 전용 프로바이오틱스</li>
+          <li>강아지 유산균 - 반려견 장 건강 솔루션</li>
+          <li>고양이 유산균 - 반려묘 면역력 강화</li>
+          <li>반려동물 건강식품 - 영양 보조제</li>
+        </ul>
+      </div>
+
       <OrganizationStructuredData
         data={{
           name: "비오드(BIODE)",
@@ -282,7 +304,7 @@ export default function BIODEHomePage() {
       <section className="biode-banner-pc">
         <img
           src="/20250915_BOID_Homepage_1.png"
-          alt="BIODE PC Banner"
+          alt="비오드 라이트핏 펫 유산균 - 반려동물 장 건강 솔루션"
           className="biode-banner-pc__img"
         />
       </section>
@@ -291,7 +313,7 @@ export default function BIODEHomePage() {
       <section className="biode-banner-mobile">
         <img
           src="/banner_after.png"
-          alt="BIODE Mobile Banner"
+          alt="비오드 반려동물 유산균 - 강아지 고양이 프로바이오틱스"
           className="biode-banner-mobile__img"
         />
       </section>
@@ -312,7 +334,7 @@ export default function BIODEHomePage() {
                 <img
                   ref={firstSliderImageRef}
                   src="/slide1.png"
-                  alt="BIODE 미리보기 1"
+                  alt="비오드 유산균 원칙 - 과학적 데이터 기반 반려동물 건강"
                   className="biode-vertical-slider__img"
                   onLoad={() => {
                     const img = firstSliderImageRef.current;
@@ -332,7 +354,7 @@ export default function BIODEHomePage() {
               <Link href="/wow/technology">
                 <img
                   src="/slide2.png"
-                  alt="BIODE 미리보기 2"
+                  alt="비오드 기술력 - 특허 균주 펫 프로바이오틱스"
                   className="biode-vertical-slider__img"
                 />
               </Link>
@@ -343,7 +365,7 @@ export default function BIODEHomePage() {
               <Link href="/wow/effect">
                 <img
                   src="/slide3.png"
-                  alt="BIODE 미리보기 3"
+                  alt="비오드 효과 - 반려동물 면역력 장건강 개선"
                   className="biode-vertical-slider__img"
                 />
               </Link>
@@ -357,7 +379,7 @@ export default function BIODEHomePage() {
         <div className="biode-first-time__container" style={{minHeight: '29vh'}}>
           <div className="biode-first-time__image-wrapper" style={{marginTop: 0}}>
             <Link href="/experience">
-              <img src="/first.png" alt="비오드 소개" className="biode-first-time__image" />
+              <img src="/first.png" alt="비오드가 처음이신가요? 반려동물 유산균 체험하기" className="biode-first-time__image" />
             </Link>
           </div>
         </div>
