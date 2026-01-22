@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>비오드(BIODE) - 반려동물 유산균 전문 기업</title>
+    <link>https://biode.co.kr</link>
+    <description>과학적 데이터에 근거한 세계 최고 수준의 반려동물 유산균 솔루션을 제공합니다.</description>
+    <language>ko</language>
+    <lastBuildDate>Thu, 23 Jan 2026 00:00:00 +0900</lastBuildDate>
+    <atom:link href="https://biode.co.kr/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>비오드 - 세계 최고 수준의 반려동물 유산균</title>
+      <link>https://biode.co.kr/</link>
+      <description>비오드(BIODE)는 과학적 데이터에 근거한 세계 최고 수준의 반려동물 유산균 솔루션을 제공합니다.</description>
+      <pubDate>Thu, 23 Jan 2026 00:00:00 +0900</pubDate>
+      <guid>https://biode.co.kr/</guid>
+    </item>
+
+    <item>
+      <title>비오드 체험하기</title>
+      <link>https://biode.co.kr/experience</link>
+      <description>비오드 반려동물 유산균을 직접 체험해보세요.</description>
+      <pubDate>Thu, 23 Jan 2026 00:00:00 +0900</pubDate>
+      <guid>https://biode.co.kr/experience</guid>
+    </item>
+
+    <item>
+      <title>비오드 문의하기</title>
+      <link>https://biode.co.kr/contact</link>
+      <description>비오드에 문의사항이 있으시면 연락주세요.</description>
+      <pubDate>Thu, 23 Jan 2026 00:00:00 +0900</pubDate>
+      <guid>https://biode.co.kr/contact</guid>
+    </item>
+
+    <item>
+      <title>Only 비오드</title>
+      <link>https://biode.co.kr/only</link>
+      <description>비오드만의 특별한 기술력을 소개합니다.</description>
+      <pubDate>Thu, 23 Jan 2026 00:00:00 +0900</pubDate>
+      <guid>https://biode.co.kr/only</guid>
+    </item>
+
+    <item>
+      <title>비오드 기술력</title>
+      <link>https://biode.co.kr/wow/technology</link>
+      <description>비오드의 세계 최고 수준 기술력을 확인하세요.</description>
+      <pubDate>Thu, 23 Jan 2026 00:00:00 +0900</pubDate>
+      <guid>https://biode.co.kr/wow/technology</guid>
+    </item>
+
+    <item>
+      <title>비오드 효과</title>
+      <link>https://biode.co.kr/wow/effect</link>
+      <description>비오드 반려동물 유산균의 효과를 알아보세요.</description>
+      <pubDate>Thu, 23 Jan 2026 00:00:00 +0900</pubDate>
+      <guid>https://biode.co.kr/wow/effect</guid>
+    </item>
+
+    <item>
+      <title>비오드 원칙</title>
+      <link>https://biode.co.kr/wow/principle</link>
+      <description>비오드가 지키는 원칙을 소개합니다.</description>
+      <pubDate>Thu, 23 Jan 2026 00:00:00 +0900</pubDate>
+      <guid>https://biode.co.kr/wow/principle</guid>
+    </item>
+  </channel>
+</rss>
