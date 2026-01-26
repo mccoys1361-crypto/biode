@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     template: "%s | 비오드(BIODE)",
   },
   description:
-    "비오드(BIODE)는 과학적 데이터에 근거한 세계 최고 수준의 반려동물 유산균 솔루션을 제공합니다. 라이트핏 펫 유산균으로 반려동물의 건강한 삶을 지켜드립니다.",
+    "과학적 데이터 기반 프리미엄 반려동물 유산균. 비오드 라이트핏으로 반려동물 건강을 지켜드립니다.",
   keywords: [
     "비오드",
     "BIODE",
