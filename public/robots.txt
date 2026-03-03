@@ -1,14 +1,6 @@
+# 모든 크롤러 기본 설정
 User-agent: *
 Allow: /
-
-# 메인 페이지
-Allow: /
-Allow: /experience
-Allow: /contact
-Allow: /only
-Allow: /wow/technology
-Allow: /wow/effect
-Allow: /wow/principle
 
 # API는 크롤링 제한
 Disallow: /api/

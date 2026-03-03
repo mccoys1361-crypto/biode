@@ -92,9 +92,13 @@ export default function WowExperiencePage() {
   };
   return (
     <div>
-      <section className="img-section">
-        <img src="/contact/contact_01.png" className="pc" />
-        <img src="/contact/m_contact_01.png" className="mobile" />
+      <section className="img-section seo-overlay">
+        <img src="/contact/contact_01.png" className="pc" alt="고객센터 - 고객의 마음을 가장 먼저 생각합니다" />
+        <img src="/contact/m_contact_01.png" className="mobile" alt="고객센터 - 고객의 마음을 가장 먼저 생각합니다" />
+        <div className="seo-overlay__text">
+          <h1>고객센터</h1>
+          <p>고객의 마음을 가장 먼저 생각합니다.</p>
+        </div>
       </section>
       <section className="contact" style={{ marginBottom: 0 }}>
         <div className="rows">
