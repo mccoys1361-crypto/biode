@@ -1,14 +1,17 @@
 # 모든 크롤러 기본 설정
 User-agent: *
 Allow: /
+Allow: /_next/static/
 
-# API는 크롤링 제한
+# API와 내부 데이터만 크롤링 제한
 Disallow: /api/
-Disallow: /_next/
+Disallow: /_next/data/
+Disallow: /portal/
 
 # 네이버 검색봇 전용 설정
 User-agent: Yeti
 Allow: /
+Allow: /_next/static/
 Crawl-delay: 1
 
 # 사이트맵 위치
