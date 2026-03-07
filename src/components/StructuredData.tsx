@@ -140,6 +140,34 @@ export function BreadcrumbStructuredData({ data }: { data: BreadcrumbSchema }) {
   );
 }
 
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+export function FAQStructuredData({ items }: { items: FAQItem[] }) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+
+  return (
+    <Script
+      id="faq-schema"
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
 export function WebSiteStructuredData({ data }: { data: WebSiteSchema }) {
   const schema = {
     "@context": "https://schema.org",

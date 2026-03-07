@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { OrganizationStructuredData } from "@/components/StructuredData";
+import { OrganizationStructuredData, FAQStructuredData } from "@/components/StructuredData";
 import BannerSlider from "@/components/BannerSlider";
 import VerticalSlider from "@/components/VerticalSlider";
 
@@ -9,6 +9,29 @@ interface Banner {
   description?: string;
   imageUrl: string;
 }
+
+const faqItems = [
+  {
+    question: "비오드 유산균은 강아지와 고양이 모두 급여할 수 있나요?",
+    answer: "네, 비오드 라이트핏 펫 유산균은 강아지와 고양이 모두를 위해 설계된 프로바이오틱스 제품입니다. 반려동물의 종류에 관계없이 안전하게 급여하실 수 있습니다.",
+  },
+  {
+    question: "비오드 유산균은 하루에 얼마나 급여하나요?",
+    answer: "하루 한 포를 권장합니다. 사료나 간식에 섞어 급여하시면 됩니다. 반려동물의 체중이나 건강 상태에 따라 조절이 가능하며, 자세한 급여 방법은 제품 패키지를 참고해 주세요.",
+  },
+  {
+    question: "비오드 유산균의 원료는 안전한가요?",
+    answer: "비오드는 사람이 먹을 수 있는 HUMAN GRADE 등급의 원료만을 사용합니다. 세계적 원료사 DANISCO의 17종 고기능 혼합 유산균과 특허받은 항비만 균주를 사용하며, 모든 성분을 엄격하게 관리합니다.",
+  },
+  {
+    question: "비오드 유산균은 어떤 효과가 있나요?",
+    answer: "비오드 라이트핏 펫 유산균은 과학적 임상 데이터로 효과를 증명한 제품입니다. 장 건강 개선, 면역력 강화, 체지방 감소에 도움을 줄 수 있으며, 반려동물의 전반적인 건강수명 증진을 목표로 설계되었습니다.",
+  },
+  {
+    question: "비오드 제품은 어디서 구매할 수 있나요?",
+    answer: "비오드 공식 홈페이지에서 구매하실 수 있으며, 제품 관련 문의는 문의하기 페이지를 통해 연락해 주시면 친절히 안내드리겠습니다.",
+  },
+];
 
 const staticBanners: Banner[] = [
   {
@@ -117,6 +140,20 @@ export default function BIODEHomePage() {
           <h2>비오드가 처음이시라구요?</h2>
           <p>그렇다면 먼저, <Link href="/experience">경험한 분들의 이야기</Link>와 만나보세요!</p>
         </div>
+      </section>
+
+      {/* FAQ 섹션 - 검색엔진 색인 개선 */}
+      <FAQStructuredData items={faqItems} />
+      <section className="biode-faq">
+        <h2 className="biode-faq__title">자주 묻는 질문</h2>
+        <dl className="biode-faq__list">
+          {faqItems.map((item, index) => (
+            <div key={index} className="biode-faq__item">
+              <dt className="biode-faq__question">{item.question}</dt>
+              <dd className="biode-faq__answer">{item.answer}</dd>
+            </div>
+          ))}
+        </dl>
       </section>
     </div>
   );

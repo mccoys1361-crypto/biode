@@ -12,7 +12,6 @@ Disallow: /portal/
 User-agent: Yeti
 Allow: /
 Allow: /_next/static/
-Crawl-delay: 1
 
 # 사이트맵 위치
 Sitemap: https://biode.co.kr/sitemap.xml

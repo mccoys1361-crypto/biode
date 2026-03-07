@@ -219,6 +219,53 @@
   }
 }
 
+// FAQ 섹션
+.biode-faq {
+  padding: 3rem 1.5rem 4rem;
+  max-width: 900px;
+  margin: 0 auto;
+
+  &__title {
+    text-align: center;
+    font-size: clamp(1.3rem, 3vw, 1.75rem);
+    font-weight: 700;
+    color: #401F1D;
+    margin-bottom: 2rem;
+  }
+
+  &__list {
+    margin: 0;
+  }
+
+  &__item {
+    border-bottom: 1px solid #f0ebe4;
+    padding: 1.25rem 0;
+
+    &:first-child {
+      border-top: 1px solid #f0ebe4;
+    }
+  }
+
+  &__question {
+    font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+    font-weight: 700;
+    color: #8F4C4A;
+    margin-bottom: 0.6rem;
+
+    &::before {
+      content: "Q. ";
+    }
+  }
+
+  &__answer {
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
+    line-height: 1.75;
+    color: #555;
+    margin: 0;
+    padding-left: 0;
+  }
+}
+
 // 기본 HTML 요소 스타일
 html,
 body {
