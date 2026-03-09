@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { OrganizationStructuredData, FAQStructuredData } from "@/components/StructuredData";
+import { OrganizationStructuredData, FAQStructuredData, WebSiteStructuredData } from "@/components/StructuredData";
 import BannerSlider from "@/components/BannerSlider";
 import VerticalSlider from "@/components/VerticalSlider";
 
@@ -36,17 +36,17 @@ const faqItems = [
 const staticBanners: Banner[] = [
   {
     id: 1,
-    title: "banner1",
+    title: "비오드 라이트핏 펫 유산균 - 반려동물 프리미엄 프로바이오틱스",
     imageUrl: "/banner-news/1762569966294_qm99lc4dz2m.png",
   },
   {
     id: 2,
-    title: "banner2",
+    title: "비오드 유산균 - 과학적 데이터 기반 반려동물 건강 솔루션",
     imageUrl: "/banner-news/1762569988785_hmhad09c2sm.png",
   },
   {
     id: 3,
-    title: "banner3",
+    title: "비오드 BIODE - 세계 최고 수준의 반려동물 유산균 브랜드",
     imageUrl: "/banner3.png",
   },
 ];
@@ -54,6 +54,13 @@ const staticBanners: Banner[] = [
 export default function BIODEHomePage() {
   return (
     <div className="biode-home" style={{ backgroundColor: '#ffffff' }}>
+      <WebSiteStructuredData
+        data={{
+          name: "비오드(BIODE)",
+          url: "https://biode.co.kr",
+          description: "과학적 데이터 기반 프리미엄 반려동물 유산균. 비오드 라이트핏으로 반려동물 건강을 지켜드립니다.",
+        }}
+      />
       <OrganizationStructuredData
         data={{
           name: "비오드(BIODE)",

@@ -1,4 +1,6 @@
-import Script from "next/script";
+// JSON-LD 구조화 데이터 컴포넌트
+// 중요: next/script의 Script 대신 일반 <script> 태그를 사용해야
+// 서버 사이드 렌더링 시 HTML에 포함되어 네이버/구글 봇이 읽을 수 있음
 
 interface OrganizationSchema {
   name: string;
@@ -80,8 +82,7 @@ export function OrganizationStructuredData({
   };
 
   return (
-    <Script
-      id="organization-schema"
+    <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />
@@ -111,8 +112,7 @@ export function ArticleStructuredData({ data }: { data: ArticleSchema }) {
   };
 
   return (
-    <Script
-      id="article-schema"
+    <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />
@@ -132,8 +132,7 @@ export function BreadcrumbStructuredData({ data }: { data: BreadcrumbSchema }) {
   };
 
   return (
-    <Script
-      id="breadcrumb-schema"
+    <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />
@@ -160,8 +159,7 @@ export function FAQStructuredData({ items }: { items: FAQItem[] }) {
   };
 
   return (
-    <Script
-      id="faq-schema"
+    <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />
@@ -178,8 +176,7 @@ export function WebSiteStructuredData({ data }: { data: WebSiteSchema }) {
   };
 
   return (
-    <Script
-      id="website-schema"
+    <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />
