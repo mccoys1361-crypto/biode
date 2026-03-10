@@ -15,3 +15,7 @@ Allow: /_next/static/
 
 # 사이트맵 위치
 Sitemap: https://biode.co.kr/sitemap.xml
+
+# RSS 피드
+# 네이버 서치어드바이저 > 요청 > RSS 제출에 아래 URL 등록
+# https://biode.co.kr/feed.xml

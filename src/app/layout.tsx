@@ -88,6 +88,9 @@ export const metadata: Metadata = {
     languages: {
       "ko-KR": "/",
     },
+    types: {
+      "application/rss+xml": "/feed.xml",
+    },
   },
   openGraph: {
     type: "website",
@@ -129,6 +132,7 @@ export const metadata: Metadata = {
   },
   other: {
     "naver-site-verification": "0e2e56f813e2704f1cb07506de8c48ba991ca932",
+    "msvalidate.01": "54ac95407bb5434892164a2e9d90ef4f",
   },
 };
 

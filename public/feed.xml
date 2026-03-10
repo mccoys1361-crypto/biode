@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>비오드(BIODE) - 세계 최고 수준의 반려동물 유산균</title>
+    <link>https://biode.co.kr</link>
+    <description>과학적 데이터 기반 프리미엄 반려동물 유산균. 비오드 라이트핏으로 반려동물 건강을 지켜드립니다.</description>
+    <language>ko</language>
+    <lastBuildDate>Mon, 10 Mar 2026 00:00:00 +0900</lastBuildDate>
+    <atom:link href="https://biode.co.kr/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>비오드(BIODE) - 세계 최고 수준의 반려동물 유산균</title>
+      <link>https://biode.co.kr/</link>
+      <guid>https://biode.co.kr/</guid>
+      <pubDate>Mon, 10 Mar 2026 00:00:00 +0900</pubDate>
+      <description>과학적 데이터에 근거한 세계 최고 수준의 반려동물 유산균. 라이트핏 펫 유산균으로 반려동물의 건강한 삶을 지켜드립니다. 비오드는 세계 최고가 아니면 만들지 않는다는 원칙에서 시작했습니다.</description>
+    </item>
+
+    <item>
+      <title>놀라운 경험의 시작 - 비오드 고객 후기와 실제 변화</title>
+      <link>https://biode.co.kr/experience</link>
+      <guid>https://biode.co.kr/experience</guid>
+      <pubDate>Mon, 10 Mar 2026 00:00:00 +0900</pubDate>
+      <description>비오드 라이트핏 펫 유산균을 경험한 고객들의 실제 후기. 체중 관리, 장 건강 개선, 활력 증가까지. 반려동물과 함께하는 놀라운 변화를 만나보세요.</description>
+    </item>
+
+    <item>
+      <title>ONLY 비오드 - 더 오랜 시간 반려동물과 함께하는 세상</title>
+      <link>https://biode.co.kr/only</link>
+      <guid>https://biode.co.kr/only</guid>
+      <pubDate>Mon, 10 Mar 2026 00:00:00 +0900</pubDate>
+      <description>비오드는 꿈꿉니다. 더 오랜 시간 반려동물과 함께할 수 있는 세상을. 완전히 새로운 2세대 유산균으로 반려동물의 건강수명을 지켜드립니다.</description>
+    </item>
+
+    <item>
+      <title>비오드의 원칙 - 세계 최고가 아니면 만들지 않습니다</title>
+      <link>https://biode.co.kr/wow/principle</link>
+      <guid>https://biode.co.kr/wow/principle</guid>
+      <pubDate>Mon, 10 Mar 2026 00:00:00 +0900</pubDate>
+      <description>비오드만의 특별한 원칙. 세계 최고가 아니면 만들지 않는다는 철학으로, 올바른 선택기준과 과학적 기술, 확실한 효과 증명을 약속합니다.</description>
+    </item>
+
+    <item>
+      <title>비오드의 기술 - 건강수명을 늘리는 2세대 유산균 기술</title>
+      <link>https://biode.co.kr/wow/technology</link>
+      <guid>https://biode.co.kr/wow/technology</guid>
+      <pubDate>Mon, 10 Mar 2026 00:00:00 +0900</pubDate>
+      <description>엄마의 눈으로 하나하나 따진 비오드의 기술. DANISCO 17종 고기능 혼합 유산균, SP 복합 코팅 기술, 2000억 CFU 함유. 사람이 먹을 수 있는 HUMAN GRADE 등급 원료만 사용합니다.</description>
+    </item>
+
+    <item>
+      <title>비오드의 효과 - 과학적 임상 데이터로 입증된 유산균</title>
+      <link>https://biode.co.kr/wow/effect</link>
+      <guid>https://biode.co.kr/wow/effect</guid>
+      <pubDate>Mon, 10 Mar 2026 00:00:00 +0900</pubDate>
+      <description>비오드 라이트핏 펫 유산균의 입증된 효과. 장 건강 개선, 체중 관리, 면역력 강화까지 ALL-IN-ONE 복합 설계. 항비만 기능 유산균 락토바실러스 퍼멘텀 특허 균주로 체지방 감소 효과를 임상으로 증명했습니다.</description>
+    </item>
+
+    <item>
+      <title>문의하기 - 비오드(BIODE)</title>
+      <link>https://biode.co.kr/contact</link>
+      <guid>https://biode.co.kr/contact</guid>
+      <pubDate>Mon, 10 Mar 2026 00:00:00 +0900</pubDate>
+      <description>비오드 제품 문의 및 상담. 반려동물 유산균에 대해 궁금한 점이 있으시면 언제든 문의해 주세요.</description>
+    </item>
+  </channel>
+</rss>
