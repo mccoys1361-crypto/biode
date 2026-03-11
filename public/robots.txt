@@ -1,21 +1,28 @@
 # 모든 크롤러 기본 설정
 User-agent: *
 Allow: /
-Allow: /_next/static/
+Disallow: /api/
+Disallow: /_next/data/
+Disallow: /portal/
+Crawl-delay: 1
 
-# API와 내부 데이터만 크롤링 제한
+# 네이버 검색봇 전용 설정 (Yeti)
+User-agent: Yeti
+Allow: /
+Disallow: /api/
+Disallow: /_next/data/
+Disallow: /portal/
+Crawl-delay: 1
+
+# 구글봇
+User-agent: Googlebot
+Allow: /
 Disallow: /api/
 Disallow: /_next/data/
 Disallow: /portal/
 
-# 네이버 검색봇 전용 설정
-User-agent: Yeti
-Allow: /
-Allow: /_next/static/
-
 # 사이트맵 위치
 Sitemap: https://biode.co.kr/sitemap.xml
 
-# RSS 피드
-# 네이버 서치어드바이저 > 요청 > RSS 제출에 아래 URL 등록
-# https://biode.co.kr/feed.xml
+# Host
+Host: https://biode.co.kr
